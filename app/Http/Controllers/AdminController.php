@@ -1,13 +1,16 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\Paginator;
+
 class AdminController extends Controller
 {
     //
     public function index(){
-        return view('admin.home.home-admin');
+        $user = DB::table('users')->count('id');
+        return view('admin.home.home-admin',['user'=>$user]);
     }
     public function tableProduct(){
         $products = DB::table('products')->get();

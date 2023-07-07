@@ -54,9 +54,32 @@ class ProductController extends Controller
         // Chuyển hướng về trang danh sách dữ liệu
         return redirect()->back()->with('success','Đã xóa thành công !');
     }
-    public function edit($id){
-        Product::find($id);
-        
+    public function editProduct(){
+        $id = request()->id;
+        $product = Product::where('id',$id)->first();
+        $categories = DB::table('categories')->get();
+        $brands = DB::table('brands')->get();
+        return view('admin.products.edit-product',['product'=>$product,'categories'=>$categories,'brands'=>$brands]);
     }
-    
+    public function updateProduct(Request $request,$id){
+        $product = Product::find($id);
+        $product->name = $request->name;
+        $product->amount = $request->amount;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        if($request->hasFile('images')){
+            //Nếu có lấy đối tượng file ảnh từ request và lưu trữ vào biến $images.
+            $images =$request->file('images');
+            //tạo tên file mới($imagePath) bằng cách kết hợp thời gian hiện tại và phần mở rộng của file ảnh (extension).
+            $imagePath = time().'.'.$images->extension();
+            //di chuyển file ảnh vào thư mục public/assets/images() của project, lưu trữ dưới tên $imagePath.
+            $images->move(public_path('uploads'),$imagePath);
+            $product->images = $imagePath;
+        }
+        $product->gender = $request->gender;
+        $product->brand_id = $request->input('brand_id');
+        $product->category_id = $request->input('category_id');
+        $product->save();
+        return redirect()->to('/product-table')->with('success','Update dữ liệu thành công !');
+    }
 }

@@ -25,7 +25,7 @@
 
                     <h4>{{$product->name}}</h4>
                     <h6 style="margin-top:10px">${{$product->price}}</h6>
-                    <em>Amount:{{$product->amount}}</em>
+                    <em>Amount:<strong>{{$product->amount}} products</strong></em>
                     <div style="margin-top: 10px; margin-bottom:10px">
                         <p>{{$product->description}}</p>
                     </div>
@@ -51,9 +51,7 @@
                     <p style="margin-bottom:20px">Brand:
                         <strong style="color:black">{{$brand}}</strong>
                     </p>
-                    <!-- <div>
-                        <input style="width: 300px;padding:5px;border-radius:5px" type="number" min="1" max="{{$product->amount}}" name="amount" value="1">
-                    </div> -->
+                  
                     <button class="buttonAmount" onclick="decreaseQuantity()">-</button>
                     <input class="inputAmount" id="quantity" type="text" value="1" min="1" name="amount" disabled >
                     <button class="buttonAmount" onclick="increaseQuantity()">+</button>
@@ -65,6 +63,14 @@
                     @endauth
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <h1>Same Products</h1>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <img src="" alt="">
             </div>
         </div>
     </div>

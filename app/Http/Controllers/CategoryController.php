@@ -30,4 +30,16 @@ class CategoryController extends Controller
         // Chuyển hướng về trang danh sách dữ liệu
         return redirect()->back()->with('success','Đã xóa thành công !');
     }
+    public function editCategory(){
+        $id  =request()->id;
+        $category = Category::where('id',$id)->first();
+        return view('admin.categories.edit-category',['category'=>$category]);
+    }
+    public function updateCategory(Request $request ,$id){
+        $category = Category::find($id);
+        $category->name  =$request->name;
+        $category->description = $request->description;
+        $category->save();
+        return redirect()->to('/category-table')->with('success','Update dữ liệu thành công !');
+    }
 }

@@ -2,6 +2,11 @@
  @section('content')
  <!-- ***** Main Banner Area Start ***** -->
  <div class="main-banner" id="top">
+ @if(Session::has('success'))
+ <script>
+    alert("Session::get('success')");
+ </script>
+ @endif
      <div class="container-fluid">
          <div class="row">
              <div class="col-lg-6">

@@ -49,8 +49,10 @@
                                     @if(Auth::user()->role == 'admin')
                                     <li><a href="/dashbroad-home">Dashbroad-admin</a></li>
                                     <li><a href="/logout">logout</a></li>
+                                    <li><a href="/updateProfile">Update Profile</a></li>
                                     @elseif(Auth::user()->role == 'user')                         
                                     <li><a href="/logout">logout</a></li>  
+                                    <li><a href="/updateProfile">Update Profile</a></li>
                                     @endif
                                 </ul>
                             </li>
@@ -60,6 +62,7 @@
                                 <ul>
                                     <li><a href="/login">Login</a></li>
                                     <li><a href="/register">Register</a></li>
+                                    
                                 </ul>
                             </li>
                             @endauth

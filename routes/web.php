@@ -34,6 +34,8 @@ Route::get('/register',[UserController::class, 'register'])->name('register');
 Route::post('/createUser',[UserController::class,'createuser'])->name('addUser');
 Route::get('/logout', [UserController::class, 'logout']);
 Route::get('/forgot',[UserController::class, 'forgot']);
+Route::get('/updateProfile',[UserController::class,'updateProfile'])->name('user.profile')->middleware('auth');
+Route::patch('/editprofile/{id}',[UserController::class,'editprofile'])->name('user.editprofile');
 //Home-admin
 Route::get('/dashbroad-home',[AdminController::class,'index']);
 //product-admin
@@ -41,16 +43,24 @@ Route::get('/product-table',[AdminController::class,'tableProduct']);
 Route::get('/product',[ProductController::class,'product']);
 Route::post('/createProduct',[ProductController::class,'createproduct'])->name('addProduct');
 Route::delete('/product-table/{id}',[ProductController::class,'delete'])->name('product.delete');
+Route::get('/editProduct',[ProductController::class,'editProduct'])->name('product.edit');
+Route::patch('/updateProduct/{id}',[ProductController::class,'updateProduct'])->name('product.update');
 //category-admin
 Route::get('/category-table',[AdminController::class,'tableCategory']);
 Route::get('/category',[CategoryController::class,'category']);
 Route::post('/createCategory',[CategoryController::class,'createcategory'])->name('addCategory');
 Route::delete('/category-table/{id}',[CategoryController::class,'delete'])->name('category.delete');
+Route::get('/editCategory',[CategoryController::class,'editCategory'])->name('category.edit');
+Route::patch('/updateCategory/{id}',[CategoryController::class,'updateCategory'])->name('category.update');
 //brand-admin
 Route::get('/brand-table',[AdminController::class,'tableBrand']);
 Route::get('/brand',[BrandController::class,'brand']);
 Route::post('/createBrand',[BrandController::class,'createbrand'])->name('addBrand');
 Route::delete('/brand-table/{id}', [BrandController::class,'delete'])->name('brand.delete');
+Route::get('/editBrand',[BrandController::class,'editBrand'])->name('brand.edit');
+Route::patch('/updateBrand/{id}',[BrandController::class,'updateBrand'])->name('brand.update');
 //user-admin
 Route::get('/user-table',[AdminController::class,'tableUser']);
 Route::delete('/user-table/{id}',[UserController::class,'delete'])->name('user.delete');
+Route::get('/editUser',[UserController::class,'editUser'])->name('user.edit');
+Route::patch('/updateUser/{id}',[UserController::class,'updateUser'])->name('user.update');

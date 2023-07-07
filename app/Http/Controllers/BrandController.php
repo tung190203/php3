@@ -29,4 +29,16 @@ class BrandController extends Controller
         Brand::findOrFail($id)->delete();
         return redirect()->back()->with('success','Đã xóa thành công');
     }
+    public function editBrand(){
+        $id = request()->id;
+        $brand=  Brand::where('id',$id)->first();
+        return view('admin.brands.edit-brand',['brand'=>$brand]);
+    }
+    public function updateBrand(Request $request,$id){
+        $brand = Brand::find($id);
+        $brand->brand_name = $request->brand_name;
+        $brand->description = $request->description;
+        $brand->save();
+        return redirect()->to('/brand-table')->with('success','Update dữ liệu thành công !');
+    }
 }

@@ -1,6 +1,11 @@
 @extends('template_admin')
 @section('content-admin')
 <main class="h-full pb-16 overflow-y-auto">
+@if(Session::has('success'))
+    <script>
+        alert("{{Session::get('success')}}");
+    </script>
+    @endif
     <div class="container grid px-6 mx-auto">
         <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
             Tables
@@ -92,10 +97,9 @@
                             </td>
                             <td class="px-4 py-3">
                                 <div class="flex items-center space-x-4 text-sm">
-
-                                    <form action="" method="GET">
-                                        @csrf
-                                        <button type="submit"
+                               
+                                       <a href=" {{route('product.edit',['id'=>$pr->id])}}">
+                                       <button type="submit"
                                             class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                                             aria-label="Edit">
                                             <svg class="w-5 h-5" aria-hidden="true" fill="currentColor"
@@ -105,7 +109,8 @@
                                                 </path>
                                             </svg>
                                         </button>
-                                    </form>
+                                       </a>
+                                   
 
                                     <form action="{{route('product.delete',['id'=> $pr->id])}}" method="POST">
                                         @csrf
@@ -131,7 +136,7 @@
             <div
                 class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
                 <span class="flex items-center col-span-3">
-                    Showing 10-20 of 100
+                    Showing 5 
                 </span>
                 <span class="col-span-2"></span>
                 <!-- Pagination -->

@@ -18,6 +18,8 @@
                             <th class="px-4 py-3">Name</th>
                             <th class="px-4 py-3">Email</th>
                             <th class="px-4 py-3">Password</th>
+                            <th class="px-4 py-3">Phone</th>
+                            <th class="px-4 py-3">Address</th>
                             <th class="px-4 py-3">Role</th>
                             <th class="px-4 py-3">Status</th>
                             <th class="px-4 py-3">Actions</th>
@@ -43,6 +45,15 @@
                                 </div>
                             </td>
                             <td class="px-4 py-3 text-sm">
+                                {{$user->phone}}
+                            </td>
+                            <td class="px-4 py-3 text-sm">
+                                <div class="text-container">
+                                    {{$user->address}}
+                                </div>
+                            </td>
+                           
+                            <td class="px-4 py-3 text-sm">
                                 {{$user->role}}
                             </td>
                             <td class="px-4 py-3 text-sm">
@@ -58,9 +69,7 @@
                             </td>
                             <td class="px-4 py-3">
                                 <div class="flex items-center space-x-4 text-sm">
-
-                                    <form action="" method="GET">
-                                        @csrf
+                                        <a href="{{route('user.edit',['id'=>$user->id])}}">
                                         <button type="submit"
                                             class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                                             aria-label="Edit">
@@ -71,7 +80,7 @@
                                                 </path>
                                             </svg>
                                         </button>
-                                    </form>
+                                        </a>
 
                                     <form action="{{route('user.delete',['id'=>$user->id])}}" method="POST">
                                         @csrf

@@ -41,7 +41,6 @@ class UserController extends Controller
         }else{
             return redirect()->to('/register')->with('false','Mật khẩu không trùng khớp');
         }
-       
     }
     public function loginUser(Request $request){
         $data = $request->only('email', 'password');
@@ -49,12 +48,17 @@ class UserController extends Controller
             // Đăng nhập thành công
             $role = DB::table('users')->where('email',$data['email'])->value('role');
             $status = DB::table('users')->where('email',$data['email'])->value('status');
+            $first_login =DB::table('users')->where('email',$data['email'])->value('first_login');
             if($status == 0){
-                if($role == 'admin'){
-                    return Redirect::to('/dashbroad-home')->with('role',$role);
+                if($first_login ==0){
+                    return Redirect::to('/updateProfile')->with('success','Vui lòng thêm số điện thoại và địa chỉ !');
                 }else{
-                    return Redirect::to('/home')->with('role',$role);
-                }
+                    if($role == 'admin'){
+                        return Redirect::to('/dashbroad-home')->with('role',$role);
+                    }else{
+                        return Redirect::to('/home')->with('role',$role);
+                    }
+                }    
             }else{
             return redirect()->back()->with('false',' Tài khoản đã bị khóa !');
             }
@@ -62,8 +66,40 @@ class UserController extends Controller
             return redirect()->back()->with('false',' Tài khoản hoặc mật khẩu không đúng !');
         }
     }
+    public function updateProfile(){
+        $user  =Auth::user();
+        return view('client.user.update-profile',['user'=>$user]);
+    }
+    public function editprofile(Request $request ,$id){
+        $user = User::find($id);
+        $user->name =$request->name;
+        $user->email =$request->email;
+        $user->password =$request->password;
+        $user->phone = $request->phone;
+        $user->address  =$request->address;
+        $user->first_login  =$request->first_login;
+        $user->save();
+        return redirect()->to('/home')->with('success','Update thành công !');
+    }
     public function delete($id){
         User::findOrFail($id)->delete();
         return redirect()->back()->with('success','Xóa người dùng thành công !');
+    }
+    public function editUser(){
+        $id = request()->id;
+        $user = User::where('id',$id)->first();
+        return view('admin.users.edit-user',['user'=>$user]);
+    }
+    public function updateUser(Request $request,$id){
+        $user = User::find($id);
+        $user->name =$request->name;
+        $user->email =$request->email;
+        $user->password =$request->password;
+        $user->phone = $request->phone;
+        $user->address  =$request->address;
+        $user->role = $request->role;
+        $user->status = $request->status;
+        $user->save();
+        return redirect()->to('/user-table')->with('success','Update dữ liệu thành công !');
     }
 }
