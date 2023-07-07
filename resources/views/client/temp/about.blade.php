@@ -182,7 +182,7 @@
                           </div>
                           <div class="col-lg-2">
                             <fieldset>
-                              <button type="submit" id="form-submit" class="main-dark-button"><i class="fa fa-paper-plane"></i></button>
+                              <button type="submit" id="form-submit" class="main-dark-button" onclick="alert('Successful registration ! \n We will contact you soon')"><i class="fa fa-paper-plane"></i></button>
                             </fieldset>
                           </div>
                         </div>

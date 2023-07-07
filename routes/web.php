@@ -26,7 +26,7 @@ Route::get('/contact',[HomeController::class, 'contact']);
 Route::get('/shop',[HomeController::class ,'shop']);
 Route::get('/man',[HomeController::class ,'man']);
 Route::get('/woman',[HomeController::class ,'woman']);
-Route::get('/detail/{id}',[HomeController::class,'detail'])->name('product.detail');
+Route::get('/detail',[HomeController::class,'detail'])->name('product.detail');
 //User
 Route::get('/login',[UserController::class,'login']);
 Route::post('/loginUser',[UserController::class,'loginUser'])->name('userLogin');

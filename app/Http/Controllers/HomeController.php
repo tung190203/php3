@@ -36,7 +36,8 @@ class HomeController extends Controller
 
         return view('client.shop.shop',['products'=>$products]);
     }
-    public function detail($id){
+    public function detail(){
+        $id = request()->id;
         $product = Product::where('id',$id)->first();
         return view('client.shop.detail',['product'=>$product]);
     }
@@ -48,4 +49,5 @@ class HomeController extends Controller
     {
         return view('client.temp.contact');
     }
+    
 }

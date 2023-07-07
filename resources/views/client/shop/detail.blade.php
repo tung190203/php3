@@ -24,21 +24,74 @@
                 <div class="right-content">
 
                     <h4>{{$product->name}}</h4>
-                    <h6>${{$product->price}}</h6>
+                    <h6 style="margin-top:10px">${{$product->price}}</h6>
                     <em>Amount:{{$product->amount}}</em>
                     <div style="margin-top: 10px; margin-bottom:10px">
                         <p>{{$product->description}}</p>
                     </div>
-                    <p style="margin-bottom: 10px">Category:
-                    <h6>{{$product->category_id}}</h6>
+                    <p >Category:
+                        @php
+                        $category = '';
+                        if($product->category_id==1){
+                        $category = 'Man clothes';
+                        }elseif($product->category_id ==2){
+                        $category= 'Woman clothes';
+                        }else{
+                        $category = 'Unisex clothes';
+                        };
+                        $brand = '';
+                                if ($product->brand_id == 1) {
+                                $brand = 'Dior';
+                                } elseif ($product->brand_id == 2) {
+                                $brand = 'Dolce';
+                                }
+                        @endphp
+                        <strong style="color:black">{{$category}}</strong>
                     </p>
-                    <p style="margin-bottom:40px">Brand:
-                    <h6>{{$product->brand_id}}</h6>
+                    <p style="margin-bottom:20px">Brand:
+                        <strong style="color:black">{{$brand}}</strong>
                     </p>
-                    
+                    <!-- <div>
+                        <input style="width: 300px;padding:5px;border-radius:5px" type="number" min="1" max="{{$product->amount}}" name="amount" value="1">
+                    </div> -->
+                    <button class="buttonAmount" onclick="decreaseQuantity()">-</button>
+                    <input class="inputAmount" id="quantity" type="text" value="1" min="1" name="amount" disabled >
+                    <button class="buttonAmount" onclick="increaseQuantity()">+</button>
+                    <div class="Order"">
+                    @auth
+                        <a href=""><button class="Orderbutton">Order</button></a>
+                    @else  
+                        <a href="/login"><button class="Orderbutton">Login to order</button></a>
+                    @endauth
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+function importCSS(url) {
+    var link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = url;
+    document.getElementsByTagName("head")[0].appendChild(link);
+}
+importCSS("assets/css/textcontent.css");
+
+     var productAmount = <?php echo  $product->amount ?>;
+        function increaseQuantity() {
+            var quantityInput = document.getElementById("quantity");
+            quantityInput.value = parseInt(quantityInput.value) + 1;
+            if (quantityInput.value > productAmount) { // Sử dụng giá trị biến JavaScript
+                quantityInput.value = productAmount;
+            }
+        }
+
+        function decreaseQuantity() {
+            var quantityInput = document.getElementById("quantity");
+            if (parseInt(quantityInput.value) > 1) {
+                quantityInput.value = parseInt(quantityInput.value) - 1;
+            }
+        }
+    </script>
 @endsection
