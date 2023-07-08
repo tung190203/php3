@@ -1,10 +1,12 @@
 <?php
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BillController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +29,10 @@ Route::get('/shop',[HomeController::class ,'shop']);
 Route::get('/man',[HomeController::class ,'man']);
 Route::get('/woman',[HomeController::class ,'woman']);
 Route::get('/detail',[HomeController::class,'detail'])->name('product.detail');
+Route::post('/addCart',[CartController::class,'addCart'])->name('product.addcart');
+Route::get('/order',[BillController::class,'order'])->name('product.order');
+Route::delete('/cart/{id}',[CartController::class,'delete'])->name('cart.delete');
+Route::post('/orderConfirm',[BillController::class,'orderConfirm'])->name('bill.order');
 //User
 Route::get('/login',[UserController::class,'login']);
 Route::post('/loginUser',[UserController::class,'loginUser'])->name('userLogin');

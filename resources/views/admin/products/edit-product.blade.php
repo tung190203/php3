@@ -125,6 +125,43 @@
                     </select>
                 </label>
                 <div class="mt-4 text-sm">
+                    <span class="text-gray-700 dark:text-gray-400">
+                        Size
+                    </span>
+                    <div class="mt-2">
+                        <label class="inline-flex items-center text-gray-600 dark:text-gray-400" style="margin-right: 50px;">
+                            <input type="checkbox"
+                                class="text-purple-600 form-checkbox focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                                name="size[]" value="S" />
+                            <span class="ml-2">S</span>
+                        </label>
+                        <label class="inline-flex items-center text-gray-600 dark:text-gray-400" style="margin-right: 50px;">
+                            <input type="checkbox"
+                                class="text-purple-600 form-checkbox focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                                name="size[]" value="M"/>
+                            <span class="ml-2">M</span>
+                        </label>
+                        <label class="inline-flex items-center text-gray-600 dark:text-gray-400" style="margin-right: 50px;">
+                            <input type="checkbox"
+                                class="text-purple-600 form-checkbox focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                                name="size[]" value="L" />
+                            <span class="ml-2">L</span>
+                        </label>
+                        <label class="inline-flex items-center text-gray-600 dark:text-gray-400" style="margin-right: 50px;">
+                            <input type="checkbox"
+                                class="text-purple-600 form-checkbox focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                                name="size[]" value="XL" />
+                            <span class="ml-2">XL</span>
+                        </label>
+                        <label class="inline-flex items-center text-gray-600 dark:text-gray-400" style="margin-right: 50px;">
+                            <input type="checkbox"
+                                class="text-purple-600 form-checkbox focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                                name="size[]" value="XXL" />
+                            <span class="ml-2">XXL</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="mt-4 text-sm">
                     <button type="submit"
                         class="px-4  py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
                         Update product

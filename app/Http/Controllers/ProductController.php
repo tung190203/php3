@@ -41,6 +41,7 @@ class ProductController extends Controller
         $data->gender = $request->gender;
         $data->brand_id = $request->input('brand_id');
         $data->category_id = $request->input('category_id');
+        $data->size = $request->input('size');
         $data->save();
         return redirect()->back()->with('success', 'Đã thêm sản phẩm thành công !');
         }else{
@@ -79,6 +80,7 @@ class ProductController extends Controller
         $product->gender = $request->gender;
         $product->brand_id = $request->input('brand_id');
         $product->category_id = $request->input('category_id');
+        $product->size = $request->input('size');
         $product->save();
         return redirect()->to('/product-table')->with('success','Update dữ liệu thành công !');
     }

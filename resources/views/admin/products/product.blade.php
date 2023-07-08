@@ -36,6 +36,7 @@
                             <th class="px-4 py-3">Gender</th>
                             <th class="px-4 py-3">Brands</th>
                             <th class="px-4 py-3">Category</th>
+                            <th class="px-4 py-3">Size</th>
                             <th class="px-4 py-3">Actions</th>
                         </tr>
                     </thead>
@@ -94,6 +95,9 @@
                                }
                                @endphp
                                {{$category}}
+                            </td>
+                            <td class="px-4 py-3 text-sm">
+                                {{$pr->size}}
                             </td>
                             <td class="px-4 py-3">
                                 <div class="flex items-center space-x-4 text-sm">

@@ -4,6 +4,12 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+.bill_name{
+        width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+}
 .text-name{
     width: 100px;
     overflow: hidden;
@@ -15,7 +21,7 @@
     height:400px;
 }
 .buttonAmount{
-    width:50px;
+    width:40px;
     height:40px;
     border-radius:5px;
     background-color: black;
@@ -28,6 +34,7 @@
     transition: 0.5s;
 }
 .inputAmount{
+    width: 150px;
     height: 40px;
     border: 1px solid black;
     border-radius: 5px;
@@ -49,4 +56,22 @@
 }
 .Order{
     margin-top: 20px;
+}
+.form-size{
+    height: 40px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding-left: 5px;
+    margin-bottom: 20px;
+    padding-right: 150px;
+}
+.forminfo{
+    margin: 20px 30px;
+}
+.forminfo1{
+    margin: 20px 30px;
+    border:  1px solid white;
+    border-radius:5px;
+    padding: 20px 30px;
+    box-shadow: 0 0 3px black;
 }

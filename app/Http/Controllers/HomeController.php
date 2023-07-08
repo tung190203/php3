@@ -39,8 +39,11 @@ class HomeController extends Controller
     public function detail(){
         $id = request()->id;
         $product = Product::where('id',$id)->first();
-        return view('client.shop.detail',['product'=>$product]);
+        $sameProducts = Product::where('category_id',$product['category_id'])->get();
+    
+        return view('client.shop.detail',['product'=>$product,'sameProducts'=>$sameProducts]);
     }
+
     public function about()
     {
         return view('client.temp.about');
@@ -49,5 +52,6 @@ class HomeController extends Controller
     {
         return view('client.temp.contact');
     }
+    
     
 }
