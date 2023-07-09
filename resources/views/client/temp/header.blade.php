@@ -48,13 +48,15 @@
                                 <ul>
                                     @if(Auth::user()->role == 'admin')
                                     <li><a href="/dashbroad-home">Dashbroad-admin</a></li>
+                                    <li><a href="/order">My Order</a></li>
+                                    <li><a href="/bill">Check Your Order</a></li>
+                                    <li><a href="/updateProfile">Update Profile</a></li>
                                     <li><a href="/logout">logout</a></li>
-                                    <li><a href="/updateProfile">Update Profile</a></li>
+                                    @elseif(Auth::user()->role == 'user') 
                                     <li><a href="/order">My Order</a></li>
-                                    @elseif(Auth::user()->role == 'user')                         
+                                    <li><a href="/bill">Check Your Order</a></li>
+                                    <li><a href="/updateProfile">Update Profile</a></li>    
                                     <li><a href="/logout">logout</a></li>  
-                                    <li><a href="/updateProfile">Update Profile</a></li>
-                                    <li><a href="/order">My Order</a></li>
                                     @endif
                                 </ul>
                             </li>

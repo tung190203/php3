@@ -44,13 +44,47 @@ class BillController extends Controller
                 foreach ($cart as $item) {
                     $item->status_cart = 1;
                     $item->save();
+                    $product = Product::find($item->product_id);
+                if ($product) {
+                    $product->amount = $product->amount - $item->product_amount;
+                    $product->save();
+                }
                 }    
             }
             return redirect()->to('/');
         }else{
             return redirect()->back()->with('false','Đặt đơn không thành công !');
         }
-        
+    }  
+    public function delete($id)
+    {
+        $bill = Bill::findOrFail($id);
+        $bill->delete();
+        $cart = Cart::whereIn('id', $bill->cart_id)->where('user_id', $bill->user_id)->where('status_cart', 1)->get();
+        //nếu không trống
+        if ($cart->isNotEmpty()) {
+            //Lặp lại từng cart->xóa
+            $cart->each(function ($item) {
+                $item->delete();
+            });
+        }
+        return redirect()->back()->with('success', 'Xóa Bill thành công');
     }
-    
+    public function editBill(){
+        $id = request()->id;
+        $bill = Bill::where('id',$id)->first();
+        return view('admin.bills.edit-bill',['bill'=>$bill]);
+    }
+    public function updateBill(Request $request ,$id){
+        $bill = Bill::find($id);
+        $bill->status_bill = $request->status_bill;
+        $bill->save();
+        return redirect()->to('/bill-table')->with('success','Cập nhật bill thành công !');
+    }
+    public function myBill(){
+    $user = Auth::user();
+    $bills = Bill::whereIn('status_bill', ['Đơn hàng mới', 'Đang giao'])->where('user_id', $user->id)->get();
+    return view('client.shop.bill', ['bills' => $bills]);
+}
+ 
 }

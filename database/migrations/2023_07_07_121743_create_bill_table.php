@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('phone')->limit(10);
             $table->integer('total');
             $table->string('pttt')->default('Thanh toán khi nhận hàng');
-            $table->string('status')->default('Đơn hàng mới');
+            $table->string('status_bill')->default('Đơn hàng mới');
             $table->timestamps();
         });
     }

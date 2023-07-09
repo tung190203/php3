@@ -16,6 +16,12 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+.textt{
+    width: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 .imgg{
     width:350px; 
     height:400px;

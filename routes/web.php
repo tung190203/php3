@@ -28,11 +28,18 @@ Route::get('/contact',[HomeController::class, 'contact']);
 Route::get('/shop',[HomeController::class ,'shop']);
 Route::get('/man',[HomeController::class ,'man']);
 Route::get('/woman',[HomeController::class ,'woman']);
+//bill &cart home
 Route::get('/detail',[HomeController::class,'detail'])->name('product.detail');
 Route::post('/addCart',[CartController::class,'addCart'])->name('product.addcart');
 Route::get('/order',[BillController::class,'order'])->name('product.order');
 Route::delete('/cart/{id}',[CartController::class,'delete'])->name('cart.delete');
 Route::post('/orderConfirm',[BillController::class,'orderConfirm'])->name('bill.order');
+Route::get('/bill',[BillController::class,'myBill']);
+//bill&cart admin
+Route::get('/bill-table',[AdminController::class,'tableBill']);
+Route::delete('/bill-table/{id}',[BillController::class,'delete'])->name('bill.delete');
+Route::get('/editBill',[BillController::class,'editBill'])->name('bill.edit');
+Route::patch('/updateBill/{id}',[BillController::class,'updateBill'])->name('bill.update');
 //User
 Route::get('/login',[UserController::class,'login']);
 Route::post('/loginUser',[UserController::class,'loginUser'])->name('userLogin');

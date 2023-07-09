@@ -27,6 +27,16 @@ class AdminController extends Controller
         $brands = DB::table('brands')->get();
         return view('admin.brands.brand',['brands'=>$brands]);
     }
+    public function tableBill(){
+        $bills = DB::table('bills')->get();
+        $perPage = 5; // số bản ghi trên mỗi trang
+        $currentPage = Paginator::resolveCurrentPage('page');
+        $bills = DB::table('bills')->paginate($perPage, ['*'], 'page', $currentPage);
+        return view('admin.bills.bill',['bills'=>$bills]);
+    }
+    public function tableCart(){
+        $carts = DB::table('bills')->get();
+    }
     public function tableUser(){
         $users = DB::table('users')->get();
         $perPage = 5; // số bản ghi trên mỗi trang

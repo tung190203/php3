@@ -32,7 +32,7 @@
                     </thead>
                     <tbody>
                     <tr>
-                       <td style="text-align:center" colspan="7">Không có đơn hàng nào</td>
+                       <td style="text-align:center" colspan="7">Không có sản phẩm nào</td>
                     </tr>
                 </tbody>
                 </table>
