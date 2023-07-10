@@ -51,7 +51,7 @@ class UserController extends Controller
             $first_login =DB::table('users')->where('email',$data['email'])->value('first_login');
             if($status == 0){
                 if($first_login ==0){
-                    return Redirect::to('/updateProfile')->with('success','Vui lòng thêm số điện thoại và địa chỉ !');
+                    return Redirect::to('/updateProfile');
                 }else{
                     if($role == 'admin'){
                         return Redirect::to('/dashbroad-home')->with('role',$role);

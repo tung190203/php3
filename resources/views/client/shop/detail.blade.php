@@ -87,9 +87,9 @@
                                 <input type="hidden" name="product_id" value="{{$product->id}}">
                                 <div class="Order"">
                                 @auth
-                                <input type="submit" class=" Orderbutton" value="Order"></input>
+                                    <input type="submit" class=" Orderbutton" value="Order"></input>
                                     @else
-                                    <a href="/login"><button class="Orderbutton">Login to order</button></a>
+                                    <a href="/login"><button class="Orderbutton" type="button" value="">Login</button></a>
                                     @endauth
                                 </div>
                             </div>
