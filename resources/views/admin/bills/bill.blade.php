@@ -65,7 +65,7 @@
                                 $cartItems = json_decode($bill->cart_id);
                                 $cartString = implode(', ', $cartItems);
                                 @endphp
-                                <a href=""><p class="textt">{{$cartString}}</p></a>
+                               <p class="textt">{{$cartString}}</p>
                             </td>
                             <td class="px-4 py-3">
                                 <div class="flex items-center space-x-4 text-sm">

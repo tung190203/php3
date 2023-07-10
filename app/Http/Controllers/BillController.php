@@ -7,7 +7,6 @@ use App\Models\Bill;
 use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
-
 class BillController extends Controller
 {
     //
@@ -83,8 +82,13 @@ class BillController extends Controller
     }
     public function myBill(){
     $user = Auth::user();
-    $bills = Bill::whereIn('status_bill', ['Đơn hàng mới', 'Đang giao'])->where('user_id', $user->id)->get();
-    return view('client.shop.bill', ['bills' => $bills]);
+    if(Auth::check()){
+        $bills = Bill::whereIn('status_bill', ['Đơn hàng mới', 'Đang giao'])->where('user_id', $user->id)->get();
+        return view('client.shop.bill', ['bills' => $bills]);
+    }else{
+        return redirect()->to('/login');
+    }
+   
 }
  
 }

@@ -9,14 +9,12 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-
     public function product(){
         $categories = DB::table('categories')->get();
         $brands = DB::table('brands')->get();
         return view('admin.products.add-product',['categories'=>$categories,'brands'=>$brands]);
     }
-    public function createproduct(Request $request)
-    {
+    public function createproduct(Request $request){
         //lấy thông tin sản phẩm
         $data =$request->only('name');
         //Kiểm tra sản phầm tồn tại hay chưa
@@ -48,8 +46,7 @@ class ProductController extends Controller
         return redirect()->back()->with('false', ' Sản phẩm đã tồn tại \n Thêm sản phẩm không thành công ! ');
         }
     }
-    public function delete($id)
-    {
+    public function delete($id){
         // Xóa dữ liệu trong cơ sở dữ liệu
         Product::findOrFail($id)->delete();
         // Chuyển hướng về trang danh sách dữ liệu
@@ -84,4 +81,5 @@ class ProductController extends Controller
         $product->save();
         return redirect()->to('/product-table')->with('success','Update dữ liệu thành công !');
     }
+
 }
