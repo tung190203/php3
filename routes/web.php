@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CouponController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,15 @@ Route::get('/bill-table',[AdminController::class,'tableBill']);
 Route::delete('/bill-table/{id}',[BillController::class,'delete'])->name('bill.delete');
 Route::get('/editBill',[BillController::class,'editBill'])->name('bill.edit');
 Route::patch('/updateBill/{id}',[BillController::class,'updateBill'])->name('bill.update');
+//conpon admin
+Route::get('/coupon-table',[CouponController::class,'tableCoupon']);
+Route::get('/coupon',[CouponController::class,'coupon']);
+Route::post('/createCoupon',[CouponController::class,'createcoupon'])->name('coupon.add');
+Route::delete('/coupon/{id}',[CouponController::class,'delete'])->name('coupon.delete');
+Route::get('/editCoupon',[CouponController::class,'editCoupon'])->name('coupon.edit');
+Route::patch('/updateCoupon/{id}',[CouponController::class,'updateCoupon'])->name('coupon.update');
+//coupon-home
+Route::post('/coupon/apply',[CouponController::class,'apply'])->name('coupon.apply');
 //User
 Route::get('/login',[UserController::class,'login']);
 Route::post('/loginUser',[UserController::class,'loginUser'])->name('userLogin');
@@ -52,7 +62,7 @@ Route::patch('/editprofile/{id}',[UserController::class,'editprofile'])->name('u
 //Home-admin
 Route::get('/dashbroad-home',[AdminController::class,'index']);
 //product-admin
-Route::get('/product-table',[AdminController::class,'tableProduct']);
+Route::get('/product-table',[ProductController::class,'tableProduct']);
 Route::get('/product',[ProductController::class,'product']);
 Route::post('/createProduct',[ProductController::class,'createproduct'])->name('addProduct');
 Route::delete('/product-table/{id}',[ProductController::class,'delete'])->name('product.delete');

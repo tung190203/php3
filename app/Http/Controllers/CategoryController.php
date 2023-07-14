@@ -20,7 +20,7 @@ class CategoryController extends Controller
             $data->save();
             return redirect()->back()->with('success','Thêm danh mục thành công');
         }else{
-            return redirect()->back()->with('false',' Danh mục đã tồn tại \n Thêm danh mục không thành công');
+            return redirect()->back()->with('error',' Danh mục đã tồn tại \n Thêm danh mục không thành công');
         }
     }
     public function delete($id)

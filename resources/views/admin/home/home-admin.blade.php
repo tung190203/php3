@@ -41,7 +41,7 @@
                                     Total amount
                                 </p>
                                 <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-                                    $ 46,760.89
+                                    $ {{$total}}
                                 </p>
                             </div>
                         </div>
@@ -60,7 +60,7 @@
                                     New orders
                                 </p>
                                 <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-                                    376
+                                    {{$bill}}
                                 </p>
                             </div>
                         </div>

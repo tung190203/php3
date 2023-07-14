@@ -6,16 +6,15 @@ use Illuminate\Http\Request;
 use App\Models\Bill;
 use App\Models\Cart;
 use App\Models\Product;
+use App\Models\Coupon;
 use Illuminate\Support\Facades\Auth;
 class BillController extends Controller
 {
     //
     public function order(){
         $user = Auth::user();
-        
         $cart = Cart::where('user_id', $user->id)->where('status_cart', 0)->get();
         $product = [];
-    
         if ($cart->isNotEmpty()) {
             $product = Product::join('carts', 'products.id', '=', 'carts.product_id')
                 ->select('products.*', 'carts.*')

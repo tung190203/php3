@@ -16,12 +16,15 @@ return new class extends Migration
             $table->string('name');
             $table->float('amount');
             $table->text('description')->nullable();
-            $table->float('price',8,2);
+            $table->float('price',8);
             $table->string('images')->nullable();
             $table->string('gender')->default('male');
-            $table->integer('brand_id');
-            $table->integer('category_id');
+            $table->unsignedBigInteger('brand_id');
+            $table->unsignedBigInteger('category_id');
+            $table->json('size')->nullable();
             $table->timestamps();
+            $table->foreign('brand_id')->references('id')->on('brands');
+            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 

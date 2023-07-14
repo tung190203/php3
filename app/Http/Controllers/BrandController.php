@@ -22,7 +22,7 @@ class BrandController extends Controller
             $data->save();
             return redirect()->back()->with('success','Thêm thương hiệu thành công');
         }else{
-            return redirect()->back()->with('false','Sản phẩm đã tồn tại \n Thêm thương hiệu thành công');
+            return redirect()->back()->with('error','Sản phẩm đã tồn tại \n Thêm thương hiệu thành công');
         }
     }
     public function delete($id){

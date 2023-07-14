@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bill', function (Blueprint $table) {
+        Schema::create('bills', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('email');
@@ -20,7 +20,10 @@ return new class extends Migration
             $table->integer('total');
             $table->string('pttt')->default('Thanh toán khi nhận hàng');
             $table->string('status_bill')->default('Đơn hàng mới');
+            $table->json('cart_id')->nullable();
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

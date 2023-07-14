@@ -89,6 +89,17 @@
                     </li>
                     <li class="relative px-6 py-3">
                         <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                            href="/coupon-table">
+                            <svg class="w-5 h-5 text-gray-800 dark:text-white" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m13 19-6-5-6 5V2a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v17Z"></path>
+                            </svg>
+                            <span class="ml-4">Coupons</span>
+                        </a>
+                    </li>
+                    <li class="relative px-6 py-3">
+                        <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                             href="/user-table">
                             <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round"
                                 stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -249,7 +260,7 @@
                                     class="absolute right-0 w-56 p-2 mt-2 space-y-2 text-gray-600 bg-white border border-gray-100 rounded-md shadow-md dark:border-gray-700 dark:text-gray-300 dark:bg-gray-700"
                                     aria-label="submenu">
                                     @auth
-                                
+
                                     <li class="flex">
                                         <a class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
                                             href="/home">
@@ -290,7 +301,7 @@
                                             <span>Login</span>
                                         </a>
                                     </li>
-                                    
+
                                     @endauth
                                 </ul>
                             </template>

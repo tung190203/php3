@@ -4,11 +4,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\Paginator;
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+    public function tableProduct(){
+        $perPage = 5; // số bản ghi trên mỗi trang
+        $currentPage = Paginator::resolveCurrentPage('page'); 
+        $products = Product::with('brand','category')->paginate($perPage, ['*'], 'page', $currentPage);
+        return view('admin.products.product',['products'=> $products]);
+    }
     public function product(){
         $categories = DB::table('categories')->get();
         $brands = DB::table('brands')->get();
@@ -43,7 +50,7 @@ class ProductController extends Controller
         $data->save();
         return redirect()->back()->with('success', 'Đã thêm sản phẩm thành công !');
         }else{
-        return redirect()->back()->with('false', ' Sản phẩm đã tồn tại \n Thêm sản phẩm không thành công ! ');
+        return redirect()->back()->with('error', ' Sản phẩm đã tồn tại \n Thêm sản phẩm không thành công ! ');
         }
     }
     public function delete($id){
@@ -54,10 +61,8 @@ class ProductController extends Controller
     }
     public function editProduct(){
         $id = request()->id;
-        $product = Product::where('id',$id)->first();
-        $categories = DB::table('categories')->get();
-        $brands = DB::table('brands')->get();
-        return view('admin.products.edit-product',['product'=>$product,'categories'=>$categories,'brands'=>$brands]);
+        $product = Product::with('brand','category')->where('id',$id)->first();
+        return view('admin.products.edit-product',['product'=>$product]);
     }
     public function updateProduct(Request $request,$id){
         $product = Product::find($id);

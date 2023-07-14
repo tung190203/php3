@@ -6,13 +6,13 @@
             Tables
         </h2>
         <h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
-            All Product Is Here !!!
+            All Coupon Is Here !!!
         </h4>
         <div style="margin-bottom: 15px">
-            <a href="/product">
+            <a href="/coupon">
                 <button
                     class=" px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
-                    Add product
+                    Add Coupon
                 </button>
             </a>
         </div>
@@ -47,6 +47,7 @@
         </div>
         <br>
         @endif
+
         <div class="w-full overflow-hidden rounded-lg shadow-xs">
             <div class="w-full overflow-x-auto">
                 <table class="w-full whitespace-no-wrap">
@@ -54,67 +55,33 @@
                         <tr
                             class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                             <th class="px-4 py-3">ID</th>
-                            <th class="px-4 py-3">Name</th>
-                            <th class="px-4 py-3">Amount</th>
-                            <th class="px-4 py-3">Description</th>
-                            <th class="px-4 py-3">Price</th>
-                            <th class="px-4 py-3">Images</th>
-                            <th class="px-4 py-3">Gender</th>
-                            <th class="px-4 py-3">Brands</th>
-                            <th class="px-4 py-3">Category</th>
-                            <th class="px-4 py-3">Size</th>
+                            <th class="px-4 py-3">Code</th>
+                            <th class="px-4 py-3">Discount</th>
+                            <th class="px-4 py-3">Expiration_time</th>
                             <th class="px-4 py-3">Actions</th>
                         </tr>
                     </thead>
+
                     <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                        @foreach ($products as $pr)
+                        @foreach($coupon as $cp)
                         <tr class="text-gray-700 dark:text-gray-400">
-                            <td class="px-4 py-3 text-sm">
-                                {{$pr->id}}
+
+                            <td class="px-4 py-3 text-xs">
+                                {{$cp->id}}
                             </td>
                             <td class="px-4 py-3 text-xs">
-                                <div class="text-name">
-                                    {{$pr->name}}
-                                </div>
+                                {{$cp->code}}
+                            </td>
+                            <td class="px-4 py-3 text-xs">
+                                $ {{$cp->discount}}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                {{$pr->amount}}
-                            </td>
-                            <td class="px-4 py-3 text-sm ">
-                                <div class="text-container">
-                                    {{$pr->description}}
-                                </div>
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                {{$pr->price}}
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
-                                    <img class="object-cover w-full h-full rounded-full " src="uploads/{{$pr->images}}"
-                                        alt="image" loading="lazy" />
-                                </div>
-                            </td>
-                            <td class=" px-4 py-3 text-sm">
-                                {{$pr->gender}}
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                               {{$pr->brand->brand_name}}
-
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                              {{$pr->category->name}}
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                @php
-                                $sizeItems = $pr->size;
-                                $sizeString = implode(', ', $sizeItems);
-                                @endphp
-                                {{$sizeString}}
+                                {{$cp->expiration_time}}
                             </td>
                             <td class="px-4 py-3">
                                 <div class="flex items-center space-x-4 text-sm">
 
-                                    <a href=" {{route('product.edit',['id'=>$pr->id])}}">
+                                    <a href="{{route('coupon.edit',['id'=>$cp->id])}}">
                                         <button type="submit"
                                             class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                                             aria-label="Edit">
@@ -127,8 +94,7 @@
                                         </button>
                                     </a>
 
-
-                                    <form action="{{route('product.delete',['id'=> $pr->id])}}" method="POST">
+                                    <form action="{{route('coupon.delete',['id'=>$cp->id])}}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button
@@ -152,28 +118,12 @@
             <div
                 class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
                 <span class="flex items-center col-span-3">
-                    Showing 5
+                    Showing 21-30 of 100
                 </span>
                 <span class="col-span-2"></span>
                 <!-- Pagination -->
-                <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
-                    <nav aria-label="Table navigation">
-                        <ul class="inline-flex items-center">
-                            {{$products->links()}}
-                        </ul>
-                    </nav>
-                </span>
             </div>
         </div>
     </div>
 </main>
-<script>
-function importCSS(url) {
-    var link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = url;
-    document.getElementsByTagName("head")[0].appendChild(link);
-}
-importCSS("assets/css/textcontent.css");
-</script>
 @endsection

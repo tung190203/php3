@@ -107,8 +107,8 @@
                     </span>
                     <select name="brand_id"
                         class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
-                        @foreach($brands as $br)
-                        <option value="{{$br->id}}">{{$br->brand_name}}</option>
+                        @foreach($product as $pr)
+                        <option value="{{$pr->brand->id}}">{{$pr->brand->brand_name}}</option>
                         @endforeach
                     </select>
 
@@ -119,8 +119,8 @@
                     </span>
                     <select name="category_id"
                         class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
-                        @foreach($categories as $cat)
-                        <option value="{{$cat->id}}">{{$cat->name}}</option>
+                        @foreach($product as $pr)
+                        <option value="{{$pr->category->id}}">{{$pr->category->name}}</option>
                         @endforeach
                     </select>
                 </label>
