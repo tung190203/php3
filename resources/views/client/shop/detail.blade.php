@@ -20,7 +20,7 @@
 
                 <div class="col-lg-6">
                     <div class="left-image">
-                        <img height="600" src="uploads/{{$product->images}}" alt="">
+                        <img height="500" src="uploads/{{$product->images}}" alt="">
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -76,7 +76,8 @@
                                 <label for="">Số lượng</label>
                                 <div>
                                     <button type="button" class="buttonAmount" onclick="decreaseQuantity()">-</button>
-                                    <input class="inputAmount" id="quantity" type="text" value="1" min="1" name="product_amount">
+                                    <input class="inputAmount" id="quantity" type="text" value="1" min="1"
+                                        name="product_amount">
                                     <button type="button" class="buttonAmount" onclick="increaseQuantity()">+</button>
                                 </div>
                             </div>
@@ -87,9 +88,10 @@
                                 <input type="hidden" name="product_id" value="{{$product->id}}">
                                 <div class="Order"">
                                 @auth
-                                    <input type="submit" class=" Orderbutton" value="Order"></input>
+                                    <button type=" submit" class="Orderbutton">Order</button>
                                     @else
-                                    <a href="/login"><button class="Orderbutton" type="button" value="">Login</button></a>
+                                    <a href="/login"><button class="Orderbutton" type="button"
+                                            value="">Login</button></a>
                                     @endauth
                                 </div>
                             </div>
@@ -97,9 +99,83 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </form>
+
+        <div class="container">
+            <div class="row" style="margin-bottom: 30px;">
+                <div class="col-lg-12 mt-5">
+                    <h4>Review</h4>
+                </div>
+            </div>
+            @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+            @elseif (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+            @endif
+
+            <div class="row">
+                <div class=" col-lg-12">
+
+                    <div style="max-height:500px;overflow-y:auto; border:1px solid #efefef;border-radius:5px">
+                        @foreach($comment as $cm)
+                        <div class="card-body col-lg-11"
+                            style="margin-top: 20px;margin-left:40px;margin-bottom:15px; border:1px solid white ; border-radius:5px ;box-shadow:0 0 3px black;">
+                            <div class="align-items-center">
+                                <div>
+                                    <h6 class="fw-bold mb-1">{{$cm->user->name}}</h6>
+                                    <p class="text-muted small">
+                                        {{$cm->created_at}}
+                                    </p>
+                                </div>
+                            </div>
+                            <p class="mt-2 mb-2 pb-1">
+                                {{$cm->content}}
+                            </p>
+                            <div class="small d-flex justify-content-start">
+                                <a href="#!" style="margin-right: 20px;" class="d-flex align-items-center me-3">
+                                    <i style="margin-right: 2px;" class="fa fa-thumbs-up me-3"></i>
+                                    <p class="mb-0">Like</p>
+                                </a>
+                                <a href="#!" style="margin-right: 20px;" class="d-flex align-items-center me-3">
+                                    <i style="margin-right: 2px;" class="fa fa-comment me-3"></i>
+                                    <p class="mb-0">Comment</p>
+                                </a>
+                                <a href="#!" style="margin-right: 20px;" class="d-flex align-items-center me-3">
+                                    <i style="margin-right: 2px;" class="fa fa-share me-3"></i>
+                                    <p class="mb-0">Share</p>
+                                </a>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                    <br>
+                    <div class="card">
+                        <form action="{{route('comment.add')}}" method="post">
+                            @csrf
+                            <div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
+                                <div class=" w-100">
+                                    <div class="form-outline w-100">
+                                        <label class="form-label" for="textAreaExample">Message</label>
+                                        <textarea class="form-control" id="textAreaExample" rows="4"
+                                            style="background: #fff;" name="content"></textarea>
+                                    </div>
+                                </div>
+                                <div class="float-end mt-2 pt-1">
+                                    <input type="hidden" name="product_id" value="{{$product->id}}">
+                                    <button type="submit" class="Orderbutton">Post comment</button>
+                                    <button type="reset" class="Orderbutton">Cancel</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-lg-4">
             </div>

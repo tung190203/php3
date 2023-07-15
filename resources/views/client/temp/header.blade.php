@@ -44,7 +44,7 @@
                             <li><a href="/contact">Contact Us</a></li>
                             @auth
                             <li class="submenu">
-                                <a href="javascript:;">Xin chào [{{Auth::user()->name}}]</a>
+                                <a href="javascript:;">Hello [{{Auth::user()->name}}]</a>
                                 <ul>
                                     @if(Auth::user()->role == 'admin')
                                     <li><a href="/dashbroad-home">Dashbroad-admin</a></li>

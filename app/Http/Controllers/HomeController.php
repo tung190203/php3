@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Product;
+use App\Models\Comment;
 class HomeController extends Controller
 {
     /**
@@ -40,8 +41,8 @@ class HomeController extends Controller
         $id = request()->id;
         $product = Product::where('id',$id)->first();
         $sameProducts = Product::where('category_id',$product['category_id'])->get();
-    
-        return view('client.shop.detail',['product'=>$product,'sameProducts'=>$sameProducts]);
+        $comment = Comment::with('user')->where('product_id',$id)->get();
+        return view('client.shop.detail',['product'=>$product,'sameProducts'=>$sameProducts,'comment'=>$comment]);
     }
 
     public function about()

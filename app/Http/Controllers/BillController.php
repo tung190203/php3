@@ -1,12 +1,9 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\Bill;
 use App\Models\Cart;
 use App\Models\Product;
-use App\Models\Coupon;
 use Illuminate\Support\Facades\Auth;
 class BillController extends Controller
 {
@@ -23,7 +20,6 @@ class BillController extends Controller
         }
         return view('client.shop.order', ['user' => $user, 'product' => $product]);
     }
-    
     public function orderConfirm(Request $request ){
         $user = Auth::user();
         $bill = new Bill();

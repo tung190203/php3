@@ -67,6 +67,9 @@
                                 <label class="form-label">Address</label>
                                 <input type="text" class="form-control" disabled value="{{$user->address}}">
                             </div>
+                            <div class="mb-3">
+                                <a href="/update-profile">Cập nhật thông tin để mua hàng</a>
+                            </div>
                         </form>
                     </div>
                     <div class="col-lg-2"></div>
@@ -194,6 +197,9 @@
                             <div class="mb-3">
                                 <label class="form-label">Address</label>
                                 <input type="text" class="form-control" disabled value="{{$user->address}}">
+                            </div>
+                            <div class="mb-3">
+                                <a href="/updateProfile">Cập nhật thông tin để mua hàng</a>
                             </div>
                         </form>
                     </div>

@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -48,17 +46,12 @@ class UserController extends Controller
             // Đăng nhập thành công
             $role = DB::table('users')->where('email',$data['email'])->value('role');
             $status = DB::table('users')->where('email',$data['email'])->value('status');
-            $first_login =DB::table('users')->where('email',$data['email'])->value('first_login');
             if($status == 0){
-                if($first_login ==0){
-                    return Redirect::to('/updateProfile');
-                }else{
                     if($role == 'admin'){
                         return Redirect::to('/dashbroad-home')->with('role',$role);
                     }else{
                         return Redirect::to('/home')->with('role',$role);
-                    }
-                }    
+                    }    
             }else{
             return redirect()->back()->with('false',' Tài khoản đã bị khóa !');
             }
