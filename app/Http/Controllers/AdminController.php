@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\Paginator;
@@ -43,8 +44,6 @@ class AdminController extends Controller
         $users = DB::table('users')->paginate($perPage, ['*'], 'page', $currentPage);
         return view('admin.users.user',['users'=>$users]);
     }
-    public function tableComment(){
-        return view('');
-    }
+ 
 
 }

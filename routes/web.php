@@ -62,7 +62,9 @@ Route::group(['middleware' => 'role:admin'], function () {
     Route::delete('/user-table/{id}',[UserController::class,'delete'])->name('user.delete');
     Route::get('/editUser',[UserController::class,'editUser'])->name('user.edit');
     Route::patch('/updateUser/{id}',[UserController::class,'updateUser'])->name('user.update');
-    
+    //comment-admin
+    Route::get('/comment-table',[CommentController::class,'tableComment']);
+    Route::delete('/comment-table/{id}',[CommentController::class,'delete'])->name('comment.delete');
 });
     Route::get('/unauthorized', function () {return view('404');})->name('unauthorized');
     //Home

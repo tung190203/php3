@@ -8,14 +8,6 @@
         <h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
             All Comments Is Here !!!
         </h4>
-        <div style="margin-bottom: 15px">
-            <a href="/category">
-                <button
-                    class=" px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
-                    Add Comment
-                </button>
-            </a>
-        </div>
         @if (session('success'))
         <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
             <div class="flex">
@@ -62,35 +54,24 @@
                     </thead>
                     
                     <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                   
+                    @foreach($comments as $cm)
                         <tr class="text-gray-700 dark:text-gray-400">
                           
                             <td class="px-4 py-3 text-xs">
-                                
+                                {{$cm->id}}
                             </td>
                             <td class="px-4 py-3 text-xs">
-                              
+                              {{$cm->user->name}}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                
+                                <p class="text-container">{{$cm->content}}</p>
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                
+                                {{$cm->product->name}}
                             </td>
                             <td class="px-4 py-3">
                                 <div class="flex items-center space-x-4 text-sm">
-                                   <a href="">
-                                   <button type="submit"
-                                        class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
-                                        aria-label="Edit">
-                                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
-                                            <path
-                                                d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z">
-                                            </path>
-                                        </svg>
-                                    </button>
-                                   </a>
-                                    <form action="" method="POST" >
+                                    <form action="{{route('comment.delete',['id'=>$cm->id])}}" method="POST" >
                                     @csrf
                                         @method('DELETE')
                                         <button
@@ -107,6 +88,7 @@
                                 </div>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -117,8 +99,24 @@
                 </span>
                 <span class="col-span-2"></span>
                 <!-- Pagination -->
+                <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
+                    <nav aria-label="Table navigation">
+                        <ul class="inline-flex items-center">
+                            {{$comments->links()}}
+                        </ul>
+                    </nav>
+                </span>
             </div>
         </div>
     </div>
 </main>
+<script>
+function importCSS(url) {
+    var link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = url;
+    document.getElementsByTagName("head")[0].appendChild(link);
+}
+importCSS("assets/css/textcontent.css");
+</script>
 @endsection
