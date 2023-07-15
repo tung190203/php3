@@ -1,21 +1,17 @@
 <?php
-
 namespace App\Http\Controllers;
+use App\Http\Requests\CreateCouponRequest;
 use App\Models\Coupon;
-use Cron\DayOfWeekField;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
-
 class CouponController extends Controller
 {
-    //
     public function apply(Request $request)
     {
         $couponCode = $request->input('code');
         $coupon = Coupon::where('code', $couponCode)->first();
-    
         if ($coupon) {
             //chuyển đổi thành đối tượng carbon
             $expirationTime = Carbon::parse($coupon->expiration_time);
@@ -32,7 +28,6 @@ class CouponController extends Controller
             return redirect()->back()->with('error', 'Mã coupon không hợp lệ!');
         }
     }
-    
     public function tableCoupon(){
         $coupon = DB::table('coupons')->get();
         return view('admin.coupons.coupon',['coupon'=>$coupon]);
@@ -40,7 +35,7 @@ class CouponController extends Controller
     public function coupon(){
         return view('admin.coupons.add-coupon');
     }
-    public function createcoupon(Request $request){
+    public function createcoupon(CreateCouponRequest $request){
         $data = $request->only('code','discount','expiration_time');
         $couponExists = Coupon::where('code',$data['code'])->exists();
         if(!$couponExists){
@@ -51,7 +46,7 @@ class CouponController extends Controller
             $data->save();
             return redirect()->back()->with('success','Thêm mã giảm giá thành công');
         }else{
-            return redirect()->back()->with('error','Thêm mã giảm giá không thành công');
+            return redirect()->back()->withInput()->with('error','Thêm mã giảm giá không thành công');
         }
     }
     public function editCoupon(){

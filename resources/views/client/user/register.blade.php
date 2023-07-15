@@ -1,56 +1,95 @@
 @extends('template')
 @section('content')
-<section class="loginf">
-        <div class="form-box">
-        @if(Session::has('false'))
-            <script>
-                alert("{{Session::get('false')}}");
-            </script>
-            @endif
-            <div class="form-value">
-                <form method="POST" action="{{ route('addUser') }}" >
-                @csrf
-                    <h2>Register</h2>
-                    <div class="inputbox">
-                        <ion-icon name="person-outline"></ion-icon>
-                        <input type="name" name="name" required>
-                        <label for="name">Name</label>
+<div class="page-heading about-page-heading" id="top">
+</div>
+<div class="about-us">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-6">
+                <form action="{{route('addUser')}}" method="post">
+                    @csrf
+                    <div class="heading">
+                        Register
                     </div>
-                    <div class="inputbox">
-                        <ion-icon name="mail-outline"></ion-icon>
-                        <input type="email" name="email" required>
-                        <label for="email">Email</label>
+                    <div class="form-outline mb-4">
+                        <label class="form-label"> Name</label> <span></span>
+                        <input type="name" name="name" class="form-control" />
                     </div>
-                    <div class="inputbox">
-                        <ion-icon name="lock-closed-outline"></ion-icon>
-                        <input type="password" name="password" required>
-                        <label for="password">Password</label>
+                    <div class="form-outline mb-4">
+                        <label class="form-label">Email </label>
+                        <span>
+                            @if($errors->has('email'))
+                            <div class="alert alert-danger">
+                                {{ $errors->first('email') }}
+                            </div>
+                            @endif
+                        </span>
+                        <input type="email" name="email" class="form-control" />
                     </div>
-                    <div class="inputbox">
-                        <ion-icon name="lock-open-outline"></ion-icon>
-                        <input type="password" name="confirm-password" required>
-                        <label for="cpassword">Confirm password</label>
+                    <div class="form-outline mb-4">
+                        <label class="form-label">Password</label>
+                        <span>
+                            @if($errors->has('password'))
+                            <div class="alert alert-danger">
+                                {{ $errors->first('password') }}
+                            </div>
+                            @endif
+                        </span>
+                        <input type="password" name="password" class="form-control" />
                     </div>
-                    
-                    <div class="forget">
-                        <label for=""><input type="checkbox" name="rmb">Remember Me</label>
+                    <div class="form-outline mb-4">
+                        <label class="form-label">Confirm Password</label>
+                        <span>
+                            <span>
+                                @if($errors->has('password_confirmation'))
+                                <div class="alert alert-danger">
+                                    {{ $errors->first('password_confirmation') }}
+                                </div>
+                                @endif
+                            </span>
+                        </span>
+                        <input type="password" name="password_confirmation" class="form-control" />
                     </div>
-                    <button type="submit">Register</button>
-                    <div class="register">
-                        <p style="color:white"> Have a account <a href="/login">Login</a></p>
+                    <div class="form-check mb-3">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">Remember Me</label>
+                    </div>
+                    <button type="submit" class="btn btn-dark btn-block mb-4">Register</button>
+                    <div>
+                        <p style="margin-bottom: 10px;">Have a account? <a href="/login">Login</a></p>
+                    </div>
+                    <div class="text-center">
+                        <p style="margin-bottom: 20px;">or sign in with:</p>
+                        <button type="button" class="btn btn-primary btn-floating mx-1">
+                            <i class="fa fa-facebook-f"></i>
+                        </button>
+
+                        <button type="button" class="btn btn-info btn-floating mx-1">
+                            <i class="fa fa-google"></i>
+                        </button>
+
+                        <button type="button" class="btn btn-primary btn-floating mx-1">
+                            <i class="fa fa-twitter"></i>
+                        </button>
+
+                        <button type="button" class="btn btn-secondary btn-floating mx-1">
+                            <i class="fa fa-github"></i>
+                        </button>
                     </div>
                 </form>
             </div>
+            <div class="col-lg-3"></div>
         </div>
-    </section>
-    <script>
-    function importCSS(url) {
-  var link = document.createElement("link");
-  link.rel = "stylesheet";
-  link.href = url;
-  document.getElementsByTagName("head")[0].appendChild(link);
+    </div>
+</div>
+<script>
+function importCSS(url) {
+    var link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = url;
+    document.getElementsByTagName("head")[0].appendChild(link);
 }
 importCSS("assets/css/app.css");
-
-   </script>
-        @endsection
+</script>
+@endsection

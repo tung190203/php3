@@ -16,7 +16,7 @@ class AdminController extends Controller
         $billLimit = DB::table('bills')->limit(10)->get();
         $total = DB::table('bills')->sum('total');
         $bills = DB::table('bills')->get();
-        $perPage = 5; // số bản ghi trên mỗi trang
+        $perPage = 10; // số bản ghi trên mỗi trang
         $currentPage = Paginator::resolveCurrentPage('page');
         $bills = DB::table('bills')->paginate($perPage, ['*'], 'page', $currentPage);
         return view('admin.home.home-admin',['user'=>$user,'billcount'=>$billCount,'total'=>$total,'bills'=>$bills,'comments'=>$comments]);

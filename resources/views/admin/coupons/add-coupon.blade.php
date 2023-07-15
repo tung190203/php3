@@ -55,19 +55,34 @@
                     <span class="text-gray-700 dark:text-gray-400">Code</span>
                     <input
                         class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                        name="code" />
+                        name="code" value="{{old('code')}}" />
+                        <span style="color: red;">
+                             @if($errors->has('code'))       
+                                {{ $errors->first('code')}}
+                            @endif
+                        </span>
                 </label>
                 <label class="block text-sm">
                     <span class="text-gray-700 dark:text-gray-400">Discount</span>
-                    <input type="number" min="1" value="1"
+                    <input type="number" min="1" value="{{old('discount')}}"
                         class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                         name="discount" />
+                        <span style="color: red;">
+                             @if($errors->has('discount'))       
+                                {{ $errors->first('discount')}}
+                            @endif
+                        </span>
                 </label>
                 <label class="block text-sm">
                     <span class="text-gray-700 dark:text-gray-400">Expiration Time</span>
                     <input type="date"
                         class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                        name="expiration_time" />
+                        name="expiration_time" value="{{old('expiration_time')}}" />
+                        <span style="color: red;">
+                             @if($errors->has('expiration_time'))       
+                                {{ $errors->first('expiration_time')}}
+                            @endif
+                        </span>
                 </label>
 
                 <div class="mt-4 text-sm">

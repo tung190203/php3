@@ -55,13 +55,23 @@
                     <span class="text-gray-700 dark:text-gray-400">Name</span>
                     <input
                         class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                        name="name" />
+                        name="name" value="{{old('name')}}"/>
+                        <span style="color: red;">
+                             @if($errors->has('name'))       
+                                {{ $errors->first('name')}}
+                            @endif
+                        </span>
                 </label>
                 <label class="block text-sm">
                     <span class="text-gray-700 dark:text-gray-400">Amount</span>
                     <input
                         class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                        name="amount" />
+                        name="amount" value="{{old('amount')}}"/>
+                        <span style="color: red;">
+                             @if($errors->has('amount'))       
+                                {{ $errors->first('amount')}}
+                            @endif
+                        </span>
                 </label>
                 <div class="mt-4 text-sm">
                     <label class="block text-sm">
@@ -69,8 +79,13 @@
                         <textarea
                             class=" block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                             name="description" rows="5">
-
-               </textarea>
+                            {{old('descriptioen')}}
+                        </textarea>
+                        <span style="color: red;">
+                             @if($errors->has('description'))       
+                                {{ $errors->first('description')}}
+                            @endif
+                        </span>
                     </label>
                 </div>
                 <div class="mt-4 text-sm">
@@ -78,7 +93,12 @@
                         <span class="text-gray-700 dark:text-gray-400">Price</span>
                         <input type="number" min="1"
                             class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                            name="price" />
+                            name="price"  value="{{old('price')}}"/>
+                            <span style="color: red;">
+                             @if($errors->has('price'))       
+                                {{ $errors->first('price')}}
+                            @endif
+                        </span>
                     </label>
                 </div>
                 <div class="mt-4 text-sm">
@@ -89,6 +109,11 @@
                         <input type="file" multiple
                             class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                             name="images" />
+                            <span style="color: red;">
+                             @if($errors->has('images'))       
+                                {{ $errors->first('images')}}
+                            @endif
+                        </span>
                     </label>
                    </form>
                 </div>
@@ -110,6 +135,11 @@
                             <span class="ml-2">Female</span>
                         </label>
                     </div>
+                    <span style="color: red;">
+                             @if($errors->has('gender'))       
+                                {{ $errors->first('gender')}}
+                            @endif
+                        </span>
                 </div>
                 <label class="block mt-4 text-sm">
                     <span class="text-gray-700 dark:text-gray-400">
@@ -123,7 +153,11 @@
                         <option value="{{$br->id}}">{{$br->brand_name}}</option>
                         @endforeach
                     </select>
-
+                    <span style="color: red;">
+                             @if($errors->has('brand_id'))       
+                                {{ $errors->first('brand_id')}}
+                            @endif
+                        </span>
                 </label>
                 <label class="block mt-4 text-sm">
                     <span class="text-gray-700 dark:text-gray-400">
@@ -136,6 +170,11 @@
                         <option value="{{$cat->id}}">{{$cat->name}}</option>
                         @endforeach
                     </select>
+                    <span style="color: red;">
+                             @if($errors->has('category_id'))       
+                                {{ $errors->first('category_id')}}
+                            @endif
+                        </span>
                 </label>
                 <div class="mt-4 text-sm">
                     <span class="text-gray-700 dark:text-gray-400">
@@ -173,6 +212,11 @@
                             <span class="ml-2">XXL</span>
                         </label>
                     </div>
+                    <span style="color: red;">
+                             @if($errors->has('size'))       
+                                {{ $errors->first('size')}}
+                            @endif
+                        </span>
                 </div>
                 <div class="mt-4 text-sm">
                     <button type="submit"

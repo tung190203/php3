@@ -1,41 +1,67 @@
 @extends('template')
 @section('content')
-<section class="loginf">
-@if(Session::has('false'))
-            <script>
-                alert("{{Session::get('false')}}");
-            </script>
+<div class="page-heading about-page-heading" id="top">
+</div>
+<div class="about-us">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-6">
+            @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+            @elseif (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
             @endif
-    <div class="form-box">
-        <div class="form-value">
-            <form action="{{route('userLogin')}}" method="POST">
-                @csrf
-                <h2>Login</h2>
+            <form action="{{route('userLogin')}}" method="post">
+            @csrf
+            <div class="heading">
+                Login
+            </div>
+            <div class="form-outline mb-4">
+                <label class="form-label">Email </label>
+               
+                <input type="email" name="email" class="form-control"/>
+            </div>
+            <div class="form-outline mb-4">
+                <label class="form-label">Password</label>
+                <input type="password" name="password" class="form-control"/>
+            </div>
+            <div class="form-check mb-3">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Remember Me</label>
+            </div>
+            <button type="submit" class="btn btn-dark btn-block mb-4">Register</button>
+            <div>
+            <p style="margin-bottom: 10px;">Not a member? <a href="/register">Register</a></p>
+            </div>
+            <div class="text-center">
+                <p style="margin-bottom: 20px;">or sign in with:</p>
+                <button type="button" class="btn btn-primary btn-floating mx-1">
+                    <i class="fa fa-facebook-f"></i>
+                </button>
 
-                <div class="inputbox">
-                
-                    <ion-icon name="mail-outline"></ion-icon>
-                    <input type="email" name="email" required>
-                    <label for="email">Email</label>  
-                </div>
-                <span></span>
-                <div class="inputbox">
-                    <ion-icon name="lock-closed-outline"></ion-icon>
-                    <input type="password" name="password" required>
-                    <label for="password">Password</label>
-                </div>
-                <div class="forget">
-                    <label for=""><input type="checkbox">Remember Me</label>
-                </div>
-                <button type="submit">Login</button>
-                <div class="register">
-                    <label for=""><a href="/forgot">Forget Password</a></label>
-                    <p>Don't have a account <a href="/register">Register</a></p>
-                </div>
-            </form>
+                <button type="button" class="btn btn-info btn-floating mx-1">
+                    <i class="fa fa-google"></i>
+                </button>
+
+                <button type="button" class="btn btn-primary btn-floating mx-1">
+                    <i class="fa fa-twitter"></i>
+                </button>
+
+                <button type="button" class="btn btn-secondary btn-floating mx-1">
+                    <i class="fa fa-github"></i>
+                </button>
+            </div>
+        </form>
+            </div>
+            <div class="col-lg-3"></div>
         </div>
     </div>
-</section>
+</div>
 <script>
 function importCSS(url) {
     var link = document.createElement("link");

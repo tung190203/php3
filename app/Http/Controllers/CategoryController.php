@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateCategoryRequest;
 use Illuminate\Http\Request;
 use App\Models\Category;
 class CategoryController extends Controller
@@ -10,7 +11,7 @@ class CategoryController extends Controller
     public function category(){
         return view('admin.categories.add-category');
     }
-    public function createcategory(Request $request){
+    public function createcategory(CreateCategoryRequest $request){
         $data = $request->only('name');
         $categoryExists = Category::where('name',$data['name'])->exists();
         if(!$categoryExists){
@@ -20,7 +21,7 @@ class CategoryController extends Controller
             $data->save();
             return redirect()->back()->with('success','Thêm danh mục thành công');
         }else{
-            return redirect()->back()->with('error',' Danh mục đã tồn tại \n Thêm danh mục không thành công');
+            return redirect()->back()->withInput()->with('error',' Danh mục đã tồn tại \n Thêm danh mục không thành công');
         }
     }
     public function delete($id)

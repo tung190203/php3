@@ -55,7 +55,12 @@
                     <span class="text-gray-700 dark:text-gray-400">Name</span>
                     <input
                         class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                        name="brand_name" />
+                        name="brand_name" value="{{old('brand_name')}}" />
+                        <span style="color: red;">
+                             @if($errors->has('brand_name'))       
+                                {{ $errors->first('brand_name')}}
+                            @endif
+                        </span>
                 </label>
                 <div class="mt-4 text-sm">
                     <label class="block text-sm">
@@ -63,7 +68,13 @@
                         <textarea
                             class=" block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                             name="description" rows="5">
+                            {{old('description')}}
                         </textarea>
+                        <span style="color: red;">
+                             @if($errors->has('description'))       
+                                {{ $errors->first('description')}}
+                            @endif
+                        </span>
                     </label>
                 </div>
                 <div class="mt-4 text-sm">

@@ -26,6 +26,7 @@
                     <input
                         class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                         name="name" value="{{$product->name}}" />
+                        
                 </label>
                 <label class="block text-sm">
                     <span class="text-gray-700 dark:text-gray-400">Amount</span>
@@ -107,8 +108,9 @@
                     </span>
                     <select name="brand_id"
                         class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
-                        @foreach($product as $pr)
-                        <option value="{{$pr->brand->id}}">{{$pr->brand->brand_name}}</option>
+                        <option value="{{$product->brand->id}}">{{$product->brand->brand_name}}</option>
+                        @foreach($brand as $br)
+                        <option value="{{$br->id}}">{{$br->brand_name}}</option> 
                         @endforeach
                     </select>
 
@@ -119,8 +121,10 @@
                     </span>
                     <select name="category_id"
                         class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
-                        @foreach($product as $pr)
-                        <option value="{{$pr->category->id}}">{{$pr->category->name}}</option>
+                        
+                        <option value="{{$product->category->id}}">{{$product->category->name}}</option>
+                        @foreach($category as $ct)
+                        <option value="{{$ct->id}}">{{$ct->name}}</option> 
                         @endforeach
                     </select>
                 </label>

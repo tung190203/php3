@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateBrandRequest;
 use Illuminate\Http\Request;
 use App\Models\Brand;
 
@@ -11,7 +12,7 @@ class BrandController extends Controller
     public function brand(){
         return view('admin.brands.add-brand');
     }
-    public function createbrand(Request $request)
+    public function createbrand(CreateBrandRequest $request)
     {
         $data = $request->only('brand_name');
         $brandExists = Brand::where('brand_name',$data['brand_name'])->exists();
@@ -22,7 +23,7 @@ class BrandController extends Controller
             $data->save();
             return redirect()->back()->with('success','Thêm thương hiệu thành công');
         }else{
-            return redirect()->back()->with('error','Sản phẩm đã tồn tại \n Thêm thương hiệu thành công');
+            return redirect()->back()->withInput()->with('error','Sản phẩm đã tồn tại \n Thêm thương hiệu thành công');
         }
     }
     public function delete($id){
