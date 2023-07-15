@@ -101,7 +101,6 @@
                 </div>
             </div>
         </form>
-
         <div class="container">
             <div class="row" style="margin-bottom: 30px;">
                 <div class="col-lg-12 mt-5">
@@ -117,10 +116,9 @@
                 {{ session('error') }}
             </div>
             @endif
-
+            @if(Auth::user())
             <div class="row">
                 <div class=" col-lg-12">
-
                     <div style="max-height:500px;overflow-y:auto; border:1px solid #efefef;border-radius:5px">
                         @foreach($comment as $cm)
                         <div class="card-body col-lg-11"
@@ -175,6 +173,15 @@
                     </div>
                 </div>
             </div>
+            @else
+            <div class="row">
+                <div class="col-lg-4"></div>
+                        <div class="col-lg-4">
+                            <p>Khách hàng vui lòng <a href="/login">Đăng nhập</a> để bình luận</p>
+                        </div>
+                        <div class="col-lg-4"></div>
+            </div>
+            @endif
         </div>
         <div class="row">
             <div class="col-lg-4">

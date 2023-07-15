@@ -136,8 +136,8 @@
                              <div class="thumb">
                                  <div class="hover-content">
                                      <ul>
-                                         <li><a href="{{route('product.detail',['id'=> $pr->id])}}"><i class="fa fa-eye"></i></a></li>
-                                         <li><a href=""><i class="fa fa-shopping-cart"></i></a></li>
+                                     <li><a href=""><i class="fa fa-eye"></i></a></li>
+                                         <li><a href="{{route('product.detail',['id'=> $pr->id])}}"><i class="fa fa-shopping-cart"></i></a></li>
                                      </ul>
                                  </div>
                                  <img width="350" height="368.91" src="uploads/{{$pr->images}}" alt="">
@@ -181,8 +181,8 @@
                              <div class="thumb">
                                  <div class="hover-content">
                                      <ul>
-                                         <li><a href="{{route('product.detail',['id'=> $prw->id])}}"><i class="fa fa-eye"></i></a></li>
-                                         <li><a href="single-product.html"><i class="fa fa-shopping-cart"></i></a></li>
+                                         <li><a href=""><i class="fa fa-eye"></i></a></li>
+                                         <li><a href="{{route('product.detail',['id'=> $prw->id])}}"><i class="fa fa-shopping-cart"></i></a></li>
                                      </ul>
                                  </div>
                                  <img width="350" height="368.91" src="uploads/{{$prw->images}}" alt="">
