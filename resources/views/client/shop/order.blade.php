@@ -46,89 +46,6 @@
                     </tbody>
                 </table>
                 <div class="row">
-                    <div class="col-lg-6">
-                        <label for="" style="margin-bottom: 20px">
-                            <h4>User Information</h4>
-                        </label>
-                        <form class="forminfo">
-                            <div class="mb-3">
-                                <label class="form-label">Username</label>
-                                <input type="text" class="form-control" disabled value="{{$user->name}}">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Email</label>
-                                <input type="text" class="form-control" disabled value="{{$user->email}}">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Phone</label>
-                                <input type="text" class="form-control" disabled value="{{$user->phone}}">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Address</label>
-                                <input type="text" class="form-control" disabled value="{{$user->address}}">
-                            </div>
-                            <div class="mb-3">
-                                <a href="/update-profile">Cập nhật thông tin để mua hàng</a>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="col-lg-2"></div>
-                    <div class="col-lg-4">
-                        <label for="" style="margin-bottom: 20px;">
-                            <h4>Order Detail</h4>
-                        </label>
-                        <form class="forminfo1" action="" method="">
-                            <div class="mb-4">
-                                <div class="row">
-                                    <div class="col-lg-9">
-                                        <label for="">Product</label>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <label for="">Price</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <div class="row">
-                                    <div class="col-lg-9">
-                                        <p>Shipping</p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p>$0</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <hr>
-                                <div class="row">
-                                    <div class="col-lg-9">
-                                        <p>Total</p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p>$0</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <div class="payment_item">
-                                    <div class="radion_btn">
-                                        <input type="radio" checked name="pttt" value="Thanh toán khi nhận hàng">
-                                        <label for="f-option5">Check payments</label>
-                                        <div class="check"></div>
-                                    </div>
-                                </div>
-                                <div class="payment_item active mt-2 ">
-                                    <div class="radion_btn">
-                                        <input type="radio" name="pttt" value="Chuyển tiền online">
-                                        <label for="f-option6">Paypal </label>
-                                        <div class="check"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <a href="/"><button type="submit" class="Orderbutton2">Purchase</button></a>
-                            </div>
-                        </form>
                         @else
                         <table class="table">
                             <thead>
@@ -181,7 +98,9 @@
                             <h4 class="col-lg-6">User Information</h4>
                             <div class="col-lg-3"></div>
                         </label>
-                        <form class="forminfo">
+                        <form class="forminfo" action="{{route('bill.updateprofile',['id'=>$user->id])}}" method="post">
+                            @csrf
+                            @method('PATCH')
                             <div class="mb-3">
                                 <label class="form-label">Username</label>
                                 <input type="text" class="form-control" disabled value="{{$user->name}}">
@@ -192,15 +111,13 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Phone</label>
-                                <input type="text" class="form-control" disabled value="{{$user->phone}}">
+                                <input type="text" class="form-control" name="phone" value="{{$user->phone}}">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Address</label>
-                                <input type="text" class="form-control" disabled value="{{$user->address}}">
+                                <input type="text" class="form-control" name="address"  value="{{$user->address}}">
                             </div>
-                            <div class="mb-3">
-                                <a href="/updateProfile">Cập nhật thông tin để mua hàng</a>
-                            </div>
+                            <button type="submit" class="Orderbutton" style="text-align:center">Submit</button>
                         </form>
                     </div>
                     <div class="col-lg-2"></div>

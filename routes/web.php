@@ -84,6 +84,7 @@ Route::group(['middleware' => 'role:admin'], function () {
     Route::delete('/cart/{id}',[CartController::class,'delete'])->name('cart.delete');
     Route::post('/orderConfirm',[BillController::class,'orderConfirm'])->name('bill.order');
     Route::get('/bill',[BillController::class,'myBill']);
+    Route::patch('/editprofilebill/{id}',[UserController::class,'editprofilebill'])->name('bill.updateprofile');
     //coupon-home
     Route::post('/coupon/apply',[CouponController::class,'apply'])->name('coupon.apply');
     //comment

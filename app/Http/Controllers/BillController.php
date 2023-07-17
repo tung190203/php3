@@ -25,12 +25,15 @@ class BillController extends Controller
         $bill = new Bill();
         $bill->name = $user->name;
         $bill->email = $user->email;
-        $bill->address = $user->address;
-        $bill->phone = $user->phone;
         $bill->total = $request->input('total');
         $bill->pttt = $request->input('pttt');
         $bill->user_id = $user->id;
         $bill->cart_id = $request->input('cart_id');
+          if(empty($user->phone) || empty($user->address)){
+        return redirect()->back()->with('error','Vui lòng nhập đầy đủ thông tin điện thoại và địa chỉ.');
+    }
+        $bill->address = $user->address;
+        $bill->phone = $user->phone;
         $bill->save();
         if($bill->id){
             $cart = Cart::where('user_id',$bill->user_id)->where('status_cart',0)->get();

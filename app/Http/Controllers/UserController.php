@@ -64,6 +64,13 @@ class UserController extends Controller
         $user->save();
         return redirect()->to('/home')->with('success','Update thành công !');
     }
+    public function editprofilebill(Request $request ,$id){
+        $user = User::find($id);
+        $user->phone = $request->phone;
+        $user->address  =$request->address;
+        $user->save();
+        return redirect()->back()->with('success','Update dữ liệu thành công !');
+    }
     public function delete($id){
         User::findOrFail($id)->delete();
         return redirect()->back()->with('success','Xóa người dùng thành công !');
