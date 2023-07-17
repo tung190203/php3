@@ -117,21 +117,11 @@
                             </td>
                             <td class="px-4 py-3 text-xs">
                                 @if($bill->status_bill == 'Đơn hàng mới')
-                                <span
-                                    class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:text-green-100 dark:bg-green-700">
-                                    {{$bill->status_bill}}
-                                </span>
+                                {{$bill->status_bill}}
                                 @elseif($bill->status_bill == 'Đang giao')
-                                <span
-                                    class="px-2 py-1 font-semibold leading-tight text-orange-700 bg-orange-100 rounded-full dark:text-white dark:bg-orange-600">
-                                    {{$bill->status_bill}}
-                                </span>
+                                {{$bill->status_bill}}
                                 @elseif($bill->status_bill == 'Đã giao')
-                                <span
-                                    class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:bg-red-700 dark:text-red-100">
-                                    {{$bill->status_bill}}
-                                </span>
-
+                                {{$bill->status_bill}}
                                 @endif
                             </td>
                             <td class="px-4 py-3 text-sm">
@@ -145,7 +135,7 @@
             <div
                 class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
                 <span class="flex items-center col-span-3">
-                    Showing 21-30 of 100
+                    Showing 10 of {{$billcount}} Bills
                 </span>
                 <span class="col-span-2"></span>
                 <!-- Pagination -->

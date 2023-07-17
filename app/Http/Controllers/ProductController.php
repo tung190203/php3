@@ -17,8 +17,9 @@ class ProductController extends Controller
     public function tableProduct(){
         $perPage = 5; // số bản ghi trên mỗi trang
         $currentPage = Paginator::resolveCurrentPage('page'); 
+        $totalProducts = Product::count('id');
         $products = Product::with('brand','category')->paginate($perPage, ['*'], 'page', $currentPage);
-        return view('admin.products.product',['products'=> $products]);
+        return view('admin.products.product',['products'=> $products,'totalproducts'=>$totalProducts]);
     }
     public function product(){
         $categories = DB::table('categories')->get();

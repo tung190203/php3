@@ -8,7 +8,6 @@ use Illuminate\Pagination\Paginator;
 
 class AdminController extends Controller
 {
-    //
     public function index(){
         $user = DB::table('users')->count('id');
         $billCount = DB::table('bills')->count('id');
