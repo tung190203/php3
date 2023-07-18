@@ -34,7 +34,7 @@
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
                 <label class="form-check-label" for="exampleCheck1">Remember Me</label>
             </div>
-            <button type="submit" class="btn btn-dark btn-block mb-4">Register</button>
+            <button type="submit" class="btn btn-dark btn-block mb-4">Login</button>
             <div>
             <p style="margin-bottom: 10px;">Not a member? <a href="/register">Register</a></p>
             </div>

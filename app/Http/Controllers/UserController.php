@@ -27,7 +27,7 @@ class UserController extends Controller
     public function createUser(CreateUserRequest $request)
     {
         $data = $request->validated();
-        $data['password'] = hash('sha256',$request->password);
+        $data['password'] = bcrypt($request->password);
         User::create($data);
         return redirect()->to('/login');
     }
