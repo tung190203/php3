@@ -45,7 +45,7 @@ class ProductController extends Controller
     // Kiểm tra xem có tệp ảnh được gửi lên hay không
     if ($request->hasFile('images')) {
         $image = $request->file('images');
-        if (!$image->isValid() || !in_array($image->getClientOriginalExtension(), ['jpg', 'png'])) {
+        if (!$image->isValid() || !in_array($image->getClientOriginalExtension(), ['jpg','jpeg','png'])) {
             return redirect()->back()->with('error', 'Tệp tin không hợp lệ. Chỉ chấp nhận tệp tin JPEG , JPG hoặc PNG.');
         }
         $imagePath = time() . '.' . $image->extension();

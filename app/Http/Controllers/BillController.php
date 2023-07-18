@@ -5,6 +5,8 @@ use App\Models\Bill;
 use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 class BillController extends Controller
 {
     //
@@ -53,6 +55,24 @@ class BillController extends Controller
             return redirect()->back()->with('false','Đặt đơn không thành công !');
         }
     }  
+    public function billDetail(){
+        $id = request()->id;
+        $bill = Bill::findOrFail($id);
+        $cart = DB::table('carts')->join('products','carts.product_id','=','products.id')
+        ->select('products.name','products.images','products.price','carts.id','carts.product_size','carts.product_amount')
+        ->whereIn('carts.id',$bill->cart_id)->get();
+        
+        return view('client.shop.bill-detail',['cart'=>$cart,'bill'=>$bill]);
+    }
+    public function billDetailAdmin(){
+        $id = request()->id;
+        $bill = Bill::findOrFail($id);
+        $cart = DB::table('carts')->join('products','carts.product_id','=','products.id')
+        ->select('products.name','products.images','products.price','carts.id','carts.product_size','carts.product_amount')
+        ->whereIn('carts.id',$bill->cart_id)->get();
+        
+        return view('admin.bills.bill-admin',['cart'=>$cart,'bill'=>$bill]);
+    }
     public function delete($id)
     {
         $bill = Bill::findOrFail($id);

@@ -16,7 +16,7 @@
     <div class="container">
         <div class="row">
             <label for="" style="margin-bottom: 20px;">
-                <h4>Bills Detail</h4>
+                <h4>Your Bills</h4>
             </label>
             <div class="col-lg-12">
                 <table class="table">
@@ -25,6 +25,7 @@
                         <th>Total</th>
                         <th>Payment Methods</th>
                         <th>Status</th>
+                        <th>Action</th>
                     </thead>
                     <tbody>
                     @foreach($bills as $bill)
@@ -33,6 +34,7 @@
                             <td>${{$bill->total}}</td>
                             <td>{{$bill->pttt}}</td>
                             <td>{{$bill->status_bill}}</td>
+                            <td><a href="{{route('bill.detail',['id'=>$bill->id])}}">Detail</a></td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -40,6 +42,7 @@
             </div>
         </div>
     </div>
+</div>
     <script>
     function importCSS(url) {
         var link = document.createElement("link");

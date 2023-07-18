@@ -14,7 +14,14 @@
                     </div>
                     <div class="form-outline mb-4">
                         <label class="form-label"> Name</label> <span></span>
-                        <input type="name" name="name" class="form-control" />
+                        <span>
+                            @if($errors->has('name'))
+                            <div class="alert alert-danger">
+                                {{ $errors->first('name') }}
+                            </div>
+                            @endif
+                        </span>
+                        <input type="text" name="name" class="form-control" value="{{old('name')}}"/>
                     </div>
                     <div class="form-outline mb-4">
                         <label class="form-label">Email </label>
@@ -25,7 +32,7 @@
                             </div>
                             @endif
                         </span>
-                        <input type="email" name="email" class="form-control" />
+                        <input type="email" name="email" class="form-control" value="{{old('email')}}" />
                     </div>
                     <div class="form-outline mb-4">
                         <label class="form-label">Password</label>
@@ -39,16 +46,14 @@
                         <input type="password" name="password" class="form-control" />
                     </div>
                     <div class="form-outline mb-4">
-                        <label class="form-label">Confirm Password</label>
-                        <span>
+                        <label class="form-label">Confirm Password</label>                        
                             <span>
                                 @if($errors->has('password_confirmation'))
                                 <div class="alert alert-danger">
-                                    {{ $errors->first('password_confirmation') }}
+                                {{ $errors->first('password_confirmation') }}
                                 </div>
                                 @endif
                             </span>
-                        </span>
                         <input type="password" name="password_confirmation" class="form-control" />
                     </div>
                     <div class="form-check mb-3">

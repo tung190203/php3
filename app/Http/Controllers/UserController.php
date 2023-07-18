@@ -6,6 +6,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\CreateUserRequest;
+use App\Models\Bill;
+use App\Models\Cart;
+use App\Models\Comment;
+
 class UserController extends Controller
 {
     public function login()
@@ -27,6 +31,12 @@ class UserController extends Controller
     public function createUser(CreateUserRequest $request)
     {
         $data = $request->validated();
+        $passwordConfirmation = $request->input('password_confirmation');
+        if ($data['password'] !== $passwordConfirmation) {
+            return redirect()->back()
+                ->withErrors(['password_confirmation' => 'Password confirmation does not match.'])
+                ->withInput();
+        }
         $data['password'] = bcrypt($request->password);
         User::create($data);
         return redirect()->to('/login');
@@ -72,7 +82,11 @@ class UserController extends Controller
         return redirect()->back()->with('success','Update dữ liệu thành công !');
     }
     public function delete($id){
-        User::findOrFail($id)->delete();
+       $user= User::findOrFail($id);
+       Bill::where('user_id',$user['id'])->delete();
+       Cart::where('user_id',$user['id'])->delete();
+       Comment::where('user_id',$user['id'])->delete();
+       $user->delete();     
         return redirect()->back()->with('success','Xóa người dùng thành công !');
     }
     public function editUser(){
