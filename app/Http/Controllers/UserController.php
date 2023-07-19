@@ -3,13 +3,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\CreateUserRequest;
 use App\Models\Bill;
 use App\Models\Cart;
 use App\Models\Comment;
-
 class UserController extends Controller
 {
     public function login()
