@@ -87,6 +87,7 @@ Route::group(['middleware' => 'role:admin'], function () {
     Route::get('/bill-detail',[BillController::class,'billDetail'])->name('bill.detail');
     Route::get('/bill-detail-admin',[BillController::class,'billDetailAdmin'])->name('bill.detailAdmin');
     Route::patch('/editprofilebill/{id}',[UserController::class,'editprofilebill'])->name('bill.updateprofile');
+    Route::get('/bill-confirm',[BillController::class,'billConfirm']);
     //coupon-home
     Route::post('/coupon/apply',[CouponController::class,'apply'])->name('coupon.apply');
     //comment

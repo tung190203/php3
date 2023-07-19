@@ -50,11 +50,20 @@ class BillController extends Controller
                 }
                 }    
             }
-            return redirect()->to('/');
+            return redirect()->to('/bill-confirm');
         }else{
             return redirect()->back()->with('false','Đặt đơn không thành công !');
         }
-    }  
+    } 
+    public function billConfirm(){
+        $user = Auth::user();
+        $bill = Bill::where('user_id', $user->id)->latest()->first();
+        $cart = DB::table('carts')
+        ->join('products','carts.product_id','=','products.id')
+        ->select('products.name','products.images','products.price','carts.id','carts.product_amount','carts.product_size')
+        ->whereIn('carts.id',$bill->cart_id)->get();
+        return view('client.shop.bill-confirm',['cart'=>$cart,'bill'=>$bill]);
+    }
     public function billDetail(){
         $id = request()->id;
         $bill = Bill::findOrFail($id);
