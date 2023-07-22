@@ -7,6 +7,8 @@ use App\Http\Requests\CreateUserRequest;
 use App\Models\Bill;
 use App\Models\Cart;
 use App\Models\Comment;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\DB;
 class UserController extends Controller
 {
     public function login()
@@ -102,5 +104,25 @@ class UserController extends Controller
         $user->status = $request->status;
         $user->save();
         return redirect()->to('/user-table')->with('success','Update dữ liệu thành công !');
+    }
+    public function tableUser(){
+        $users = DB::table('users')->get();
+        $perPage = 5; // số bản ghi trên mỗi trang
+        $currentPage = Paginator::resolveCurrentPage('page');
+        $users = DB::table('users')->paginate($perPage, ['*'], 'page', $currentPage);
+        return view('admin.users.user',['users'=>$users]);
+    }
+    public function search(Request $request){
+        $perPage = 5; // số bản ghi trên mỗi trang
+        $currentPage = Paginator::resolveCurrentPage('page'); 
+        $searchKeyword = $request->input('search');
+        if(!empty($searchKeyword)){
+        $users = User::where('name', 'LIKE', '%' . $searchKeyword . '%')
+        ->paginate($perPage, ['*'], 'page', $currentPage);
+        return view('admin.users.user',['users'=>$users]);
+        }else{
+            $users = DB::table('users')->paginate($perPage, ['*'], 'page', $currentPage);
+            return view('admin.users.user',['users'=> $users]);
+        } 
     }
 }

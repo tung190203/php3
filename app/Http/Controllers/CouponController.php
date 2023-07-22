@@ -32,6 +32,16 @@ class CouponController extends Controller
         $coupon = DB::table('coupons')->get();
         return view('admin.coupons.coupon',['coupon'=>$coupon]);
     }
+    public function search(Request $request){
+        $searchKeyword = $request->input('search');
+        if(!empty($searchKeyword)){
+            $coupon  =Coupon::where('code','LIKE','%'.$searchKeyword.'%')->get();
+            return view('admin.coupons.coupon',['coupon'=>$coupon]);
+        }else{
+            $coupon  = DB::table('coupons')->get();
+            return view('admin.coupons.coupon',['coupon'=>$coupon]);
+        }
+    }
     public function coupon(){
         return view('admin.coupons.add-coupon');
     }

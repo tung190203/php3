@@ -8,13 +8,24 @@
         <h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
             All Product Is Here !!!
         </h4>
-        <div style="margin-bottom: 15px">
-            <a href="/product">
-                <button
-                    class=" px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
-                    Add product
-                </button>
-            </a>
+        <div style="margin-bottom: 15px" class="flex justify-between">
+            <div>
+                <a href="/product">
+                    <button
+                        class=" px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                        Add product
+                    </button>
+                </a>
+            </div>
+            <div>
+                <form action="{{route('product.search')}}" method="POST">
+                    @csrf
+                <input
+                    class="w-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
+                    type="text" placeholder="Search for products" name="search" aria-label="Search" />
+                </form>
+                
+            </div>
         </div>
         @if (session('success'))
         <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
@@ -98,11 +109,11 @@
                                 {{$pr->gender}}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                               {{$pr->brand->brand_name}}
+                                {{$pr->brand->brand_name}}
 
                             </td>
                             <td class="px-4 py-3 text-sm">
-                              {{$pr->category->name}}
+                                {{$pr->category->name}}
                             </td>
                             <td class="px-4 py-3 text-sm">
                                 @php

@@ -23,9 +23,9 @@ use Illuminate\Support\Facades\Route;
 // Các route chỉ dành cho vai trò 'admin' ở đây
 Route::group(['middleware' => 'role:admin'], function () {
     //Home-admin
-    Route::get('/dashbroad-home',[AdminController::class,'index'])->middleware('role:admin');
+    Route::get('/dashbroad-home',[AdminController::class,'index']);
     //bill&cart admin
-    Route::get('/bill-table',[AdminController::class,'tableBill']);
+    Route::get('/bill-table',[BillController::class,'tableBill']);
     Route::delete('/bill-table/{id}',[BillController::class,'delete'])->name('bill.delete');
     Route::get('/editBill',[BillController::class,'editBill'])->name('bill.edit');
     Route::patch('/updateBill/{id}',[BillController::class,'updateBill'])->name('bill.update');
@@ -36,8 +36,10 @@ Route::group(['middleware' => 'role:admin'], function () {
     Route::delete('/coupon/{id}',[CouponController::class,'delete'])->name('coupon.delete');
     Route::get('/editCoupon',[CouponController::class,'editCoupon'])->name('coupon.edit');
     Route::patch('/updateCoupon/{id}',[CouponController::class,'updateCoupon'])->name('coupon.update');
+    Route::post('/coupon-table',[CouponController::class,'search'])->name('coupon.search');
     //product-admin
     Route::get('/product-table',[ProductController::class,'tableProduct']);
+    Route::post('/product-table',[ProductController::class,'search'])->name('product.search');
     Route::get('/product',[ProductController::class,'product']);
     Route::post('/createProduct',[ProductController::class,'createproduct'])->name('addProduct');
     Route::delete('/product-table/{id}',[ProductController::class,'delete'])->name('product.delete');
@@ -58,7 +60,8 @@ Route::group(['middleware' => 'role:admin'], function () {
     Route::get('/editBrand',[BrandController::class,'editBrand'])->name('brand.edit');
     Route::patch('/updateBrand/{id}',[BrandController::class,'updateBrand'])->name('brand.update');
     //user-admin
-    Route::get('/user-table',[AdminController::class,'tableUser']);
+    Route::get('/user-table',[UserController::class,'tableUser']);
+    Route::post('/user-table',[UserController::class,'search'])->name('user.search');
     Route::delete('/user-table/{id}',[UserController::class,'delete'])->name('user.delete');
     Route::get('/editUser',[UserController::class,'editUser'])->name('user.edit');
     Route::patch('/updateUser/{id}',[UserController::class,'updateUser'])->name('user.update');

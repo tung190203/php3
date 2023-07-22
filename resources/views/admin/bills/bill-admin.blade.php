@@ -9,6 +9,14 @@
             Bills Detail
         </h4>
         <div style="margin-bottom: 15px">
+            <a href="/bill-table">
+                <button
+                    class=" px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                     Back to bills
+                </button>
+            </a>
+        </div>
+        <div style="margin-bottom: 15px">
         </div>
         <div class="w-full overflow-hidden rounded-lg shadow-xs">
             <div class="w-full overflow-x-auto">
