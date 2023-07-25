@@ -56,10 +56,6 @@
                             </span>
                         <input type="password" name="password_confirmation" class="form-control" />
                     </div>
-                    <div class="form-check mb-3">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">Remember Me</label>
-                    </div>
                     <button type="submit" class="btn btn-dark btn-block mb-4">Register</button>
                     <div>
                         <p style="margin-bottom: 10px;">Have a account? <a href="/login">Login</a></p>

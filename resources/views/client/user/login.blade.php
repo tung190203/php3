@@ -31,7 +31,7 @@
                 <input type="password" name="password" class="form-control"/>
             </div>
             <div class="form-check mb-3">
-                <input type="checkbox" class="form-check-input" >
+                <input type="checkbox" name="remember_token" class="form-check-input" >
                 <label class="form-check-label" >Remember Me</label>
             </div>
             <button type="submit" class="btn btn-dark btn-block mb-4">Login</button>

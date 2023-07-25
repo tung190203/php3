@@ -37,7 +37,8 @@ class UserController extends Controller
     }
     public function loginUser(Request $request){
         $credentials = $request->only('email', 'password');
-        if (Auth::attempt($credentials)) {
+        $remember = $request->filled('remember_token');
+        if (Auth::attempt($credentials, $remember)){
             $user = Auth::user();
             if ($user->status == 0) {
                 return redirect($user->role === 'admin' ? '/dashbroad-home' : '/home');

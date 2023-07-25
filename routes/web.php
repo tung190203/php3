@@ -106,3 +106,5 @@ Route::group(['middleware' => 'role:admin'], function () {
     Route::get('/forgot',[UserController::class, 'forgot']);
     Route::get('/updateProfile',[UserController::class,'updateProfile'])->name('user.profile');
     Route::patch('/editprofile/{id}',[UserController::class,'editprofile'])->name('user.editprofile');
+    //verify-email
+    
