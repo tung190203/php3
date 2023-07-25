@@ -13,11 +13,11 @@
             <div>
                 <form action="{{route('user.search')}}" method="POST">
                     @csrf
-                <input
-                    class="w-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
-                    type="text" placeholder="Search for users" name="search" aria-label="Search" />
+                    <input
+                        class="w-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
+                        type="text" placeholder="Search for users" name="search" aria-label="Search" />
                 </form>
-                
+
             </div>
         </div>
         @if (session('success'))
@@ -95,7 +95,7 @@
                                     {{$user->address}}
                                 </div>
                             </td>
-                           
+
                             <td class="px-4 py-3 text-sm">
                                 {{$user->role}}
                             </td>
@@ -103,16 +103,16 @@
                                 @php
                                 $status = '';
                                 if($user->status ==0){
-                                    $status = 'Unlocked';
+                                $status = 'Unlocked';
                                 }elseif($user->status ==1){
-                                    $status = 'Locked';
+                                $status = 'Locked';
                                 }
                                 @endphp
                                 {{$status}}
                             </td>
                             <td class="px-4 py-3">
                                 <div class="flex items-center space-x-4 text-sm">
-                                        <a href="{{route('user.edit',['id'=>$user->id])}}">
+                                    <a href="{{route('user.edit',['id'=>$user->id])}}">
                                         <button type="submit"
                                             class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                                             aria-label="Edit">
@@ -123,7 +123,7 @@
                                                 </path>
                                             </svg>
                                         </button>
-                                        </a>
+                                    </a>
 
                                     <form action="{{route('user.delete',['id'=>$user->id])}}" method="POST">
                                         @csrf
@@ -162,6 +162,16 @@
                 </span>
             </div>
         </div>
+        <a href="/export-users">
+            <button
+                class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue">
+                <svg class="w-5 h-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    fill="none" viewBox="0 0 16 18">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M8 1v11m0 0 4-4m-4 4L4 8m11 4v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-3" />
+                </svg>
+            </button>
+        </a>
     </div>
 </main>
 <script>
@@ -172,6 +182,5 @@ function importCSS(url) {
     document.getElementsByTagName("head")[0].appendChild(link);
 }
 importCSS("assets/css/textcontent.css");
-
 </script>
 @endsection

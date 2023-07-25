@@ -20,15 +20,16 @@
                     <div class="card-body">
                         <div class="container mb-5 mt-3">
                             <div class="row d-flex align-items-baseline">
-                                <div class="col-xl-9">
+                                <div class="col-xl-8">
                                     <p style="color: #7e8d9f;font-size: 20px;">Invoice >>
                                         <strong>ID:#{{$bill->id}}</strong></p>
                                 </div>
-                                <div class="col-xl-3 float-end">
+                                <div class="col-xl-4 float-end">
                                     <a class="btn btn-light text-capitalize border-0" data-mdb-ripple-color="dark"><i
                                             class="fa fa-print text-primary"></i> Print</a>
-                                    <a class="btn btn-light text-capitalize" data-mdb-ripple-color="dark"><i
-                                            class="fa fa-file text-danger"></i> Export</a>
+                                            <input type="hidden" name="bill_id" value="{{$bill->id}}">
+                                   <a href="{{route('bill.export',['bill_id'=>$bill->id])}}" class="btn btn-light text-capitalize" data-mdb-ripple-color="dark"><i
+                                            class="fa fa-file text-danger"></i>Export</a>     
                                 </div>
                                 <hr>
                             </div>

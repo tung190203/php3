@@ -8,6 +8,7 @@ use App\Models\Bill;
 use App\Models\Cart;
 use App\Models\Comment;
 use Illuminate\Pagination\Paginator;
+
 class UserController extends Controller
 {
     public function login(){
@@ -32,8 +33,10 @@ class UserController extends Controller
                 ->withInput();
         }
         $data['password'] = bcrypt($request->password);
-        User::create($data);
-        return redirect()->to('/login');
+        
+        $user=User::create($data);
+        $user->sendEmailVerificationNotification();
+        return redirect()->to('/email/verify');
     }
     public function loginUser(Request $request){
         $credentials = $request->only('email', 'password');
@@ -102,4 +105,30 @@ class UserController extends Controller
             $users = $query->paginate($perPage, ['*'], 'page', $currentPage);
             return view('admin.users.user', compact('users'));
     }
+    // public function emailVerificationSuccess()
+    // {
+    //     // Kiểm tra xem người dùng đã đăng nhập hay chưa
+    //     if (Auth::check()) {
+    //         // Lấy thông tin người dùng đã đăng nhập
+    //         $user = Auth::user();
+    //         // Kiểm tra xem người dùng đã xác thực email chưa
+    //         if (!$user->hasVerifiedEmail()) {
+    //             // Xác thực email và lưu trữ thời gian xác thực thành công
+    //             $user->markEmailAsVerified();
+    
+    //             // Thực hiện lưu trữ thời gian xác thực vào cơ sở dữ liệu
+    //             $user->email_verified_at = now();
+    //             $user->save();
+    //             // Kích hoạt sự kiện EmailVerified
+    //             event(new EmailVerified($user));
+    
+    //             // Thực hiện hành động tiếp theo (chẳng hạn chuyển hướng hoặc thông báo thành công)
+    //             return redirect()->to('/');
+    //         } else {
+    //             // Người dùng đã xác thực email trước đó, không cần thực hiện gì cả
+    //         }
+    //     } else {
+    //         // Người dùng chưa đăng nhập, xử lý lỗi hoặc thông báo cho người dùng
+    //     }
+    // }
 }

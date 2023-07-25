@@ -1,4 +1,7 @@
 <?php
+
+use App\Exports\BillsExport;
+use App\Exports\ProductsExport;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\BrandController;
@@ -9,7 +12,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CouponController;
-use App\Http\Controllers\VerificationController;
+use App\Http\Controllers\ExportController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -69,10 +72,18 @@ Route::group(['middleware' => 'role:admin'], function () {
     //comment-admin
     Route::get('/comment-table',[CommentController::class,'tableComment']);
     Route::delete('/comment-table/{id}',[CommentController::class,'delete'])->name('comment.delete');
+    //export
+    Route::get('/export-users', [ExportController::class,'exportUsers']);
+    Route::get('/export-bills',[ExportController::class,'exportBills']);
+    Route::get('/export-products',[ExportController::class,'exportProducts']);
+    Route::get('/export-bill-confirm',[ExportController::class,'exportBillConfirm'])->name('bill.export');
 });
 //
+    
+    //verify-email
+    Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/unauthorized', function () {return view('404');})->name('unauthorized');
-    //Home
+        //Home
     Route::get('/',[HomeController::class ,'index']);
     Route::get('/home',[HomeController::class ,'index']);
     //page
@@ -98,13 +109,21 @@ Route::group(['middleware' => 'role:admin'], function () {
     //comment
     Route::post('/comment',[CommentController::class,'postComment'])->name('comment.add');
     //User
-    Route::get('/login',[UserController::class,'login'])->name('logink');
-    Route::post('/loginUser',[UserController::class,'loginUser'])->name('userLogin');
-    Route::get('/register',[UserController::class, 'register'])->name('register');
-    Route::post('/createUser',[UserController::class,'createuser'])->name('addUser');
     Route::get('/logout', [UserController::class, 'logout']);
     Route::get('/forgot',[UserController::class, 'forgot']);
     Route::get('/updateProfile',[UserController::class,'updateProfile'])->name('user.profile');
     Route::patch('/editprofile/{id}',[UserController::class,'editprofile'])->name('user.editprofile');
-    //verify-email
     
+});
+    Route::get('/login',[UserController::class,'login'])->name('login');
+    Route::post('/loginUser',[UserController::class,'loginUser'])->name('userLogin');
+    Route::get('/register',[UserController::class, 'register'])->name('register');
+    Route::post('/createUser',[UserController::class,'createuser'])->name('addUser');
+    //accuracy
+    Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+    })->middleware('auth')->name('verification.notice');
+    Route::get('/email/verify/{id}/{hash}', function (Illuminate\Foundation\Auth\EmailVerificationRequest $request) {
+    $request->fulfill();
+    return redirect('/');
+    })->middleware(['auth', 'signed'])->name('verification.verify');

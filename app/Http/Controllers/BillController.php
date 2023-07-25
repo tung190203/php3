@@ -29,7 +29,6 @@ class BillController extends Controller
         }
         return view('client.shop.order', ['user' => $user, 'product' => $product]);
     }
-   
     public function orderConfirm(Request $request ){
         $user = Auth::user();
         $bill = new Bill();
@@ -122,7 +121,7 @@ class BillController extends Controller
     }else{
         return redirect()->to('/login');
     }
-   
-}
- 
+    }
+  
+
 }

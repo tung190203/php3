@@ -112,5 +112,7 @@ return [
     */
 
     'password_timeout' => 10800,
-
+    'verification' => [
+        'expire' => 60, // Thời gian hết hạn xác thực email (phút)
+    ],
 ];
