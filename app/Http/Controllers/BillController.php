@@ -29,6 +29,7 @@ class BillController extends Controller
         }
         return view('client.shop.order', ['user' => $user, 'product' => $product]);
     }
+   
     public function orderConfirm(Request $request ){
         $user = Auth::user();
         $bill = new Bill();
@@ -69,7 +70,7 @@ class BillController extends Controller
         ->join('products','carts.product_id','=','products.id')
         ->select('products.name','products.images','products.price','carts.id','carts.product_amount','carts.product_size')
         ->whereIn('carts.id',$bill->cart_id)->get();
-        return view('client.shop.bill-confirm',['cart'=>$cart,'bill'=>$bill]);
+        return view('client.shop.bill-confirm',compact('cart','bill'));
     }
     public function billDetail(){
         $id = request()->id;
@@ -78,7 +79,7 @@ class BillController extends Controller
         ->select('products.name','products.images','products.price','carts.id','carts.product_size','carts.product_amount')
         ->whereIn('carts.id',$bill->cart_id)->get();
         
-        return view('client.shop.bill-detail',['cart'=>$cart,'bill'=>$bill]);
+        return view('client.shop.bill-detail',compact('cart','bill'));
     }
     public function billDetailAdmin(){
         $id = request()->id;
@@ -87,7 +88,7 @@ class BillController extends Controller
         ->select('products.name','products.images','products.price','carts.id','carts.product_size','carts.product_amount')
         ->whereIn('carts.id',$bill->cart_id)->get();
         
-        return view('admin.bills.bill-admin',['cart'=>$cart,'bill'=>$bill]);
+        return view('admin.bills.bill-admin',compact('cart','bill'));
     }
     public function delete($id)
     {
@@ -105,20 +106,19 @@ class BillController extends Controller
     }
     public function editBill(){
         $id = request()->id;
-        $bill = Bill::where('id',$id)->first();
-        return view('admin.bills.edit-bill',['bill'=>$bill]);
+        $bill = Bill::findOrFail($id);
+        return view('admin.bills.edit-bill',compact('bill'));
     }
     public function updateBill(Request $request ,$id){
         $bill = Bill::find($id);
-        $bill->status_bill = $request->status_bill;
-        $bill->save();
+        $bill->update($request->all());
         return redirect()->to('/bill-table')->with('success','Cập nhật bill thành công !');
     }
     public function myBill(){
     $user = Auth::user();
     if(Auth::check()){
         $bills = Bill::whereIn('status_bill', ['Đơn hàng mới', 'Đang giao'])->where('user_id', $user->id)->get();
-        return view('client.shop.bill', ['bills' => $bills]);
+        return view('client.shop.bill', compact('bills'));
     }else{
         return redirect()->to('/login');
     }

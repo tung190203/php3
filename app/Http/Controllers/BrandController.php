@@ -1,14 +1,14 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Http\Requests\CreateBrandRequest;
 use Illuminate\Http\Request;
 use App\Models\Brand;
-
 class BrandController extends Controller
 {
-    //
+    public function tableBrand(){
+        $brands = Brand::all();
+        return view('admin.brands.brand',compact('brands'));
+    }
     public function brand(){
         return view('admin.brands.add-brand');
     }
@@ -23,7 +23,7 @@ class BrandController extends Controller
             $data->save();
             return redirect()->back()->with('success','Thêm thương hiệu thành công');
         }else{
-            return redirect()->back()->withInput()->with('error','Sản phẩm đã tồn tại \n Thêm thương hiệu thành công');
+            return redirect()->back()->withInput();
         }
     }
     public function delete($id){
@@ -32,14 +32,12 @@ class BrandController extends Controller
     }
     public function editBrand(){
         $id = request()->id;
-        $brand=  Brand::where('id',$id)->first();
-        return view('admin.brands.edit-brand',['brand'=>$brand]);
+        $brand = Brand::findOrFail($id);
+        return view('admin.brands.edit-brand',compact('brand'));
     }
     public function updateBrand(Request $request,$id){
         $brand = Brand::find($id);
-        $brand->brand_name = $request->brand_name;
-        $brand->description = $request->description;
-        $brand->save();
+        $brand->update($request->all());
         return redirect()->to('/brand-table')->with('success','Update dữ liệu thành công !');
     }
 }

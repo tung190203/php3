@@ -35,26 +35,7 @@
             </div>
             <input type="hidden" name="first_login" value="1">
             <button type="submit" class="btn btn-dark btn-block mb-4">Send</button>
-            <div>
-            <p style="margin-bottom: 10px;">Back to <a href="/login">Login</a></p>
-            </div>
-            <div class="text-center">
-                <p style="margin-bottom: 20px;">or sign in with:</p>
-                <button type="button" class="btn btn-primary btn-floating mx-1">
-                    <i class="fa fa-facebook-f"></i>
-                </button>
-
-                <button type="button" class="btn btn-info btn-floating mx-1">
-                    <i class="fa fa-google"></i>
-                </button>
-
-                <button type="button" class="btn btn-primary btn-floating mx-1">
-                    <i class="fa fa-twitter"></i>
-                </button>
-
-                <button type="button" class="btn btn-secondary btn-floating mx-1">
-                    <i class="fa fa-github"></i>
-                </button>
+            <div>    
             </div>
         </form>
             </div>

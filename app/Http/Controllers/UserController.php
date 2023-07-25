@@ -8,27 +8,22 @@ use App\Models\Bill;
 use App\Models\Cart;
 use App\Models\Comment;
 use Illuminate\Pagination\Paginator;
-use Illuminate\Support\Facades\DB;
 class UserController extends Controller
 {
-    public function login()
-    {
+    public function login(){
         return view('client.user.login');
     }
-    public function register()
-    {
+    public function register(){
         return view('client.user.register');
     }
-    public function forgot()
-    {
+    public function forgot(){
         return view('client.user.forgot');
     }
     public function logout(){
         Auth::logout();
         return redirect('/login');
     }
-    public function createUser(CreateUserRequest $request)
-    {
+    public function createUser(CreateUserRequest $request){
         $data = $request->validated();
         $passwordConfirmation = $request->input('password_confirmation');
         if ($data['password'] !== $passwordConfirmation) {
@@ -41,15 +36,11 @@ class UserController extends Controller
         return redirect()->to('/login');
     }
     public function loginUser(Request $request){
-        $data = $request->only('email', 'password');
-        if (Auth::attempt($data)) {
+        $credentials = $request->only('email', 'password');
+        if (Auth::attempt($credentials)) {
             $user = Auth::user();
             if ($user->status == 0) {
-                if ($user->role == 'admin') {
-                    return redirect()->to('/dashbroad-home');
-                } else {
-                    return redirect()->to('/home');
-                }
+                return redirect($user->role === 'admin' ? '/dashbroad-home' : '/home');
             } else {
                 Auth::logout();
                 return redirect()->back()->with('error', 'Tài khoản đã bị khóa!');
@@ -59,24 +50,18 @@ class UserController extends Controller
         }
     }
     public function updateProfile(){
-        $user  =Auth::user();
-        return view('client.user.update-profile',['user'=>$user]);
+        $user =Auth::user();
+        return view('client.user.update-profile',compact('user'));
     }
     public function editprofile(Request $request ,$id){
         $user = User::find($id);
-        $user->name =$request->name;
-        $user->email =$request->email;
-        $user->password =$request->password;
-        $user->phone = $request->phone;
-        $user->address  =$request->address;
-        $user->first_login  =$request->first_login;
+        $user->update($request->all());
         $user->save();
         return redirect()->to('/home')->with('success','Update thành công !');
     }
     public function editprofilebill(Request $request ,$id){
         $user = User::find($id);
-        $user->phone = $request->phone;
-        $user->address  =$request->address;
+        $user->update($request->all());
         $user->save();
         return redirect()->back()->with('success','Update dữ liệu thành công !');
     }
@@ -90,39 +75,30 @@ class UserController extends Controller
     }
     public function editUser(){
         $id = request()->id;
-        $user = User::where('id',$id)->first();
-        return view('admin.users.edit-user',['user'=>$user]);
+        $user = User::findOrFail($id);
+        return view('admin.users.edit-user',compact('user'));
     }
     public function updateUser(Request $request,$id){
         $user = User::find($id);
-        $user->name =$request->name;
-        $user->email =$request->email;
-        $user->password =$request->password;
-        $user->phone = $request->phone;
-        $user->address  =$request->address;
-        $user->role = $request->role;
-        $user->status = $request->status;
+        $user->update($request->all());
         $user->save();
         return redirect()->to('/user-table')->with('success','Update dữ liệu thành công !');
     }
     public function tableUser(){
-        $users = DB::table('users')->get();
-        $perPage = 5; // số bản ghi trên mỗi trang
-        $currentPage = Paginator::resolveCurrentPage('page');
-        $users = DB::table('users')->paginate($perPage, ['*'], 'page', $currentPage);
-        return view('admin.users.user',['users'=>$users]);
+        $users = User::all();
+        $perPage = 5;
+        $users = User::paginate($perPage);
+        return view('admin.users.user',compact('users'));
     }
     public function search(Request $request){
-        $perPage = 5; // số bản ghi trên mỗi trang
+        $perPage = 5;
         $currentPage = Paginator::resolveCurrentPage('page'); 
         $searchKeyword = $request->input('search');
-        if(!empty($searchKeyword)){
-        $users = User::where('name', 'LIKE', '%' . $searchKeyword . '%')
-        ->paginate($perPage, ['*'], 'page', $currentPage);
-        return view('admin.users.user',['users'=>$users]);
-        }else{
-            $users = DB::table('users')->paginate($perPage, ['*'], 'page', $currentPage);
-            return view('admin.users.user',['users'=> $users]);
-        } 
+        $query = User::query();
+            if (!empty($searchKeyword)) {
+                $query->where('name', 'LIKE', '%' . $searchKeyword . '%');
+            }
+            $users = $query->paginate($perPage, ['*'], 'page', $currentPage);
+            return view('admin.users.user', compact('users'));
     }
 }

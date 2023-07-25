@@ -1,34 +1,16 @@
 <?php
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Pagination\Paginator;
-
+use App\Models\Bill;
+use App\Models\Comment;
+use App\Models\User;
 class AdminController extends Controller
 {
     public function index(){
-        $user = DB::table('users')->count('id');
-        $billCount = DB::table('bills')->count('id');
-        $comments = DB::table('comments')->count('id');
-        $billLimit = DB::table('bills')->limit(10)->get();
-        $total = DB::table('bills')->sum('total');
-        $bills = DB::table('bills')->get();
-        $perPage = 10; // số bản ghi trên mỗi trang
-        $currentPage = Paginator::resolveCurrentPage('page');
-        $bills = DB::table('bills')->paginate($perPage, ['*'], 'page', $currentPage);
-        return view('admin.home.home-admin',['user'=>$user,'billcount'=>$billCount,'total'=>$total,'bills'=>$bills,'comments'=>$comments]);
-    }
-
-    public function tableCategory(){
-        $categories = DB::table('categories')->get();
-        return view('admin.categories.category',['categories'=>$categories]);
-    }
-    public function tableBrand(){
-        $brands = DB::table('brands')->get();
-        return view('admin.brands.brand',['brands'=>$brands]);
-    }
-
-
-    
- 
-
+    $user = User::count();
+    $billcount = Bill::count();
+    $comments = Comment::count();
+    $total = Bill::sum('total');
+    $bills = Bill::paginate(10);
+    return view('admin.home.home-admin', compact('user', 'billcount', 'total', 'bills', 'comments'));
+}
 }

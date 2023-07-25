@@ -1,11 +1,8 @@
 <?php
-
 namespace App\Http\Controllers;
 use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use Illuminate\Pagination\Paginator;
-
 class CommentController extends Controller
 {
     //
@@ -19,10 +16,9 @@ class CommentController extends Controller
         return redirect()->back()->with('success','Thêm bình luận thành công !');
     }
     public function tableComment(){
-        $perPage = 5; // số bản ghi trên mỗi trang
-        $currentPage = Paginator::resolveCurrentPage('page'); 
-        $comments = Comment::with('user','product')->paginate($perPage, ['*'], 'page', $currentPage);
-        return view('admin.comments.comment',['comments'=>$comments]);
+        $perPage = 5; 
+        $comments = Comment::with('user', 'product')->paginate($perPage);
+        return view('admin.comments.comment', compact('comments'));
     }
     public function delete($id){     
         Comment::findOrFail($id)->delete();

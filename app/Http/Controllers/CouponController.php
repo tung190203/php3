@@ -3,9 +3,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateCouponRequest;
 use App\Models\Coupon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-
 class CouponController extends Controller
 {
     public function apply(Request $request)
@@ -29,17 +27,17 @@ class CouponController extends Controller
         }
     }
     public function tableCoupon(){
-        $coupon = DB::table('coupons')->get();
-        return view('admin.coupons.coupon',['coupon'=>$coupon]);
+        $coupon = Coupon::all();
+        return view('admin.coupons.coupon',compact('coupon'));
     }
     public function search(Request $request){
         $searchKeyword = $request->input('search');
         if(!empty($searchKeyword)){
             $coupon  =Coupon::where('code','LIKE','%'.$searchKeyword.'%')->get();
-            return view('admin.coupons.coupon',['coupon'=>$coupon]);
+            return view('admin.coupons.coupon',compact('coupon'));
         }else{
-            $coupon  = DB::table('coupons')->get();
-            return view('admin.coupons.coupon',['coupon'=>$coupon]);
+            $coupon = Coupon::all();
+            return view('admin.coupons.coupon',compact('coupon'));
         }
     }
     public function coupon(){
@@ -61,15 +59,12 @@ class CouponController extends Controller
     }
     public function editCoupon(){
         $id = request()->id;
-        $coupon =Coupon::where('id',$id)->first();
-        return view('admin.coupons.edit-coupon',['coupon'=>$coupon]);
+        $coupon = Coupon::findOrFail($id);
+        return view('admin.coupons.edit-coupon',compact('coupon'));
     }
     public function updateCoupon(Request $request ,$id){
         $coupon = Coupon::find($id);
-        $coupon->code = $request->code;
-        $coupon->discount = $request->discount;
-        $coupon->expiration_time = $request->expiration_time;
-        $coupon->save();
+        $coupon->update($request->all());
         return redirect()->to('/coupon-table')->with('success','Update mã giảm giá thành công');
     }
     public function delete($id){

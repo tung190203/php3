@@ -1,13 +1,14 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Http\Requests\CreateCategoryRequest;
 use Illuminate\Http\Request;
 use App\Models\Category;
 class CategoryController extends Controller
 {
-    //
+    public function tableCategory(){
+        $categories = Category::all();
+        return view('admin.categories.category', compact('categories'));
+    }  
     public function category(){
         return view('admin.categories.add-category');
     }
@@ -24,23 +25,18 @@ class CategoryController extends Controller
             return redirect()->back()->withInput()->with('error',' Danh mục đã tồn tại \n Thêm danh mục không thành công');
         }
     }
-    public function delete($id)
-    {
-        // Xóa dữ liệu trong cơ sở dữ liệu
+    public function delete($id){
         Category::findOrFail($id)->delete();
-        // Chuyển hướng về trang danh sách dữ liệu
         return redirect()->back()->with('success','Đã xóa thành công !');
     }
     public function editCategory(){
         $id  =request()->id;
-        $category = Category::where('id',$id)->first();
-        return view('admin.categories.edit-category',['category'=>$category]);
+        $category = Category::findOrFail($id);
+        return view('admin.categories.edit-category',compact('category'));
     }
     public function updateCategory(Request $request ,$id){
         $category = Category::find($id);
-        $category->name  =$request->name;
-        $category->description = $request->description;
-        $category->save();
+        $category->update($request->all());
         return redirect()->to('/category-table')->with('success','Update dữ liệu thành công !');
     }
 }

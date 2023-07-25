@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CouponController;
+use App\Http\Controllers\VerificationController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -46,14 +47,14 @@ Route::group(['middleware' => 'role:admin'], function () {
     Route::get('/editProduct',[ProductController::class,'editProduct'])->name('product.edit');
     Route::patch('/updateProduct/{id}',[ProductController::class,'updateProduct'])->name('product.update');
     //category-admin
-    Route::get('/category-table',[AdminController::class,'tableCategory']);
+    Route::get('/category-table',[CategoryController::class,'tableCategory']);
     Route::get('/category',[CategoryController::class,'category']);
     Route::post('/createCategory',[CategoryController::class,'createcategory'])->name('addCategory');
     Route::delete('/category-table/{id}',[CategoryController::class,'delete'])->name('category.delete');
     Route::get('/editCategory',[CategoryController::class,'editCategory'])->name('category.edit');
     Route::patch('/updateCategory/{id}',[CategoryController::class,'updateCategory'])->name('category.update');
     //brand-admin
-    Route::get('/brand-table',[AdminController::class,'tableBrand']);
+    Route::get('/brand-table',[BrandController::class,'tableBrand']);
     Route::get('/brand',[BrandController::class,'brand']);
     Route::post('/createBrand',[BrandController::class,'createbrand'])->name('addBrand');
     Route::delete('/brand-table/{id}', [BrandController::class,'delete'])->name('brand.delete');
@@ -69,6 +70,7 @@ Route::group(['middleware' => 'role:admin'], function () {
     Route::get('/comment-table',[CommentController::class,'tableComment']);
     Route::delete('/comment-table/{id}',[CommentController::class,'delete'])->name('comment.delete');
 });
+//
     Route::get('/unauthorized', function () {return view('404');})->name('unauthorized');
     //Home
     Route::get('/',[HomeController::class ,'index']);
@@ -96,7 +98,7 @@ Route::group(['middleware' => 'role:admin'], function () {
     //comment
     Route::post('/comment',[CommentController::class,'postComment'])->name('comment.add');
     //User
-    Route::get('/login',[UserController::class,'login']);
+    Route::get('/login',[UserController::class,'login'])->name('logink');
     Route::post('/loginUser',[UserController::class,'loginUser'])->name('userLogin');
     Route::get('/register',[UserController::class, 'register'])->name('register');
     Route::post('/createUser',[UserController::class,'createuser'])->name('addUser');

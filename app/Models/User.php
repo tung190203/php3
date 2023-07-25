@@ -10,7 +10,6 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
-    use Notifiable;
     /**
      * The attributes that are mass assignable.
      *
@@ -47,7 +46,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'password' => 'hashed',
     ];
     public function bills()
-    {
+    { 
         return $this->hasMany(Bill::class);
     }
    

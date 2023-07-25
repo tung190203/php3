@@ -23,4 +23,8 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class);
     }
+    public function scopeGender($query, $gender)
+    {
+        return $query->where('gender', $gender);
+    }
 }
