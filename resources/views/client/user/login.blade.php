@@ -30,9 +30,14 @@
                 <label class="form-label">Password</label>
                 <input type="password" name="password" class="form-control"/>
             </div>
-            <div class="form-check mb-3">
+            <div class="form-check mb-3 d-flex justify-content-between">
+                <div>
                 <input type="checkbox" name="remember_token" class="form-check-input" >
-                <label class="form-check-label" >Remember Me</label>
+                <label class="form-check-label" >Remember Me</label>     
+                </div>
+               <div class="">
+                <a href="/forgot">Quên mật khẩu</a>
+               </div>
             </div>
             <button type="submit" class="btn btn-dark btn-block mb-4">Login</button>
             <div>

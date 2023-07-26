@@ -93,8 +93,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-xl-8">
-                                        <p class="ms-3">Add additional notes and payment information</p>
-
+                                        <p class="ms-3"></p>
                                     </div>
                                     <div class="col-xl-3">
                                         <ul class="list-unstyled">

@@ -1,4 +1,8 @@
 
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Reset Password</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -18,6 +22,10 @@
             border-radius: 5px;
             text-align: center;
         }
+        .logo {
+            width: 100px;
+            height: auto;
+        }
         .header {
             font-size: 24px;
             font-weight: bold;
@@ -33,30 +41,19 @@
             color: #fff;
             text-decoration: none;
             border-radius: 5px;
-            transition: 0.5s;
-            border: none;
-        }
-        .verify-button:hover{
-            background-color: #fff;
-            color: #007bff;
-            transition: 0.5s;
-            border: 1px solid #007bff;
         }
     </style>
 </head>
-
+<body>
     <div class="container">
-        <div class="header">Email Verification</div>
+        <div class="header">Send Email Password</div>
         <div class="content">
-        Thank you for registering!
-        <p>
-            <br> Please check your email and click on the verification link to verify your email address.</p>
-        <p>If you didn't receive the email, please check your spam folder or request a new verification link.</p>
-        <form action="{{route('verification.send')}}" method="POST">
-            @csrf
-            <button type="submit" class="verify-button">Verify Email</button>
-        </form>
+            
+            <p>Hello</p>
+            <p>You have asked to reset your password. Please click the link below to reset your password:</p>
         </div>
+        <a href="{{$resetLink}}" class="verify-button">Reset Password</a>
     </div>
-
+</body>
+</html>
 

@@ -1,7 +1,4 @@
 <?php
-
-use App\Exports\BillsExport;
-use App\Exports\ProductsExport;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\BrandController;
@@ -13,6 +10,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\ExportController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // Các route chỉ dành cho vai trò 'admin' ở đây
-Route::group(['middleware' => 'role:admin'], function () {
+    Route::group(['middleware' => 'role:admin'], function () {
     //Home-admin
     Route::get('/dashbroad-home',[AdminController::class,'index']);
     //bill&cart admin
@@ -78,12 +76,10 @@ Route::group(['middleware' => 'role:admin'], function () {
     Route::get('/export-products',[ExportController::class,'exportProducts']);
     Route::get('/export-bill-confirm',[ExportController::class,'exportBillConfirm'])->name('bill.export');
 });
-//
-    
     //verify-email
     Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/unauthorized', function () {return view('404');})->name('unauthorized');
-        //Home
+    //Home
     Route::get('/',[HomeController::class ,'index']);
     Route::get('/home',[HomeController::class ,'index']);
     //page
@@ -110,20 +106,30 @@ Route::group(['middleware' => 'role:admin'], function () {
     Route::post('/comment',[CommentController::class,'postComment'])->name('comment.add');
     //User
     Route::get('/logout', [UserController::class, 'logout']);
-    Route::get('/forgot',[UserController::class, 'forgot']);
     Route::get('/updateProfile',[UserController::class,'updateProfile'])->name('user.profile');
-    Route::patch('/editprofile/{id}',[UserController::class,'editprofile'])->name('user.editprofile');
-    
-});
+    Route::patch('/editprofile/{id}',[UserController::class,'editprofile'])->name('user.editprofile');  
+    });
+    //licensed
     Route::get('/login',[UserController::class,'login'])->name('login');
     Route::post('/loginUser',[UserController::class,'loginUser'])->name('userLogin');
     Route::get('/register',[UserController::class, 'register'])->name('register');
     Route::post('/createUser',[UserController::class,'createuser'])->name('addUser');
+    //reset password
+    Route::get('/forgot',[UserController::class, 'forgot']);
+    Route::post('/forgot',[UserController::class,'sendResetLinkEmail'])->name('user.forgot');
+    Route::get('/reset-password/{token}', [UserController::class,'showResetPasswordForm']);
+    Route::post('/reset-password', [UserController::class,'resetPassword'])->name('user.reset');
     //accuracy
     Route::get('/email/verify', function () {
     return view('auth.verify-email');
     })->middleware('auth')->name('verification.notice');
+
     Route::get('/email/verify/{id}/{hash}', function (Illuminate\Foundation\Auth\EmailVerificationRequest $request) {
     $request->fulfill();
     return redirect('/');
-    })->middleware(['auth', 'signed'])->name('verification.verify');
+    })->middleware(['auth','signed'])->name('verification.verify');
+    //resending email
+    Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+    return back()->with('message', 'Verification link sent!');
+    })->middleware(['auth', 'throttle:6,1'])->name('verification.send');

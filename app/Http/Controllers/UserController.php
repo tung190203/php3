@@ -8,7 +8,11 @@ use App\Models\Bill;
 use App\Models\Cart;
 use App\Models\Comment;
 use Illuminate\Pagination\Paginator;
-
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ResetPasswordMail;
+use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     public function login(){
@@ -19,6 +23,42 @@ class UserController extends Controller
     }
     public function forgot(){
         return view('client.user.forgot');
+    }
+    public function sendResetLinkEmail(Request $request){
+        $request->validate(['email' => 'required|email']);
+        $email = $request->input('email');
+        $token = Str::random(64);
+        DB::table('password_reset_tokens')->insert([
+            'email'=>$email,
+            'token' => $token,
+            'created_at' => now()
+        ]);
+        $resetLink = url('/reset-password/'.$token);
+        Mail::to($email)->send(new ResetPasswordMail($resetLink));
+        return redirect()->back()->withInput()->with('message', 'Yêu cầu đặt lại mật khẩu đã được gửi đến email của bạn.');
+    }
+    public function showResetPasswordForm($token){
+        return view('client.user.resend_password_mail', compact('token'));
+    }
+    public function resetPassword(Request $request){
+        $request->validate([
+            'token' => 'required',
+            'password' => 'required|min:6|confirmed',
+        ]);
+        $token = $request->input('token');
+        $email = DB::table('password_reset_tokens')
+        ->where('token', $token)->value('email');
+        if (!$email) {
+            return redirect()->back()->withErrors(['error' => 'Mã xác thực không hợp lệ']);
+        }
+        // Cập nhật mật khẩu mới trong cơ sở dữ liệu
+        User::where('email', $email)
+        ->update([
+            'password' => Hash::make($request->input('password'))
+        ]);
+        // Xóa mã xác thực trong cơ sở dữ liệu sau khi đã đặt lại mật khẩu
+        DB::table('password_reset_tokens')->where('token', $token)->delete();
+        return redirect('/login');
     }
     public function logout(){
         Auth::logout();
@@ -33,7 +73,6 @@ class UserController extends Controller
                 ->withInput();
         }
         $data['password'] = bcrypt($request->password);
-        
         $user=User::create($data);
         $user->sendEmailVerificationNotification();
         return redirect()->to('/email/verify');
@@ -66,7 +105,6 @@ class UserController extends Controller
     public function editprofilebill(Request $request ,$id){
         $user = User::find($id);
         $user->update($request->all());
-        $user->save();
         return redirect()->back()->with('success','Update dữ liệu thành công !');
     }
     public function delete($id){
@@ -85,7 +123,6 @@ class UserController extends Controller
     public function updateUser(Request $request,$id){
         $user = User::find($id);
         $user->update($request->all());
-        $user->save();
         return redirect()->to('/user-table')->with('success','Update dữ liệu thành công !');
     }
     public function tableUser(){
@@ -105,30 +142,4 @@ class UserController extends Controller
             $users = $query->paginate($perPage, ['*'], 'page', $currentPage);
             return view('admin.users.user', compact('users'));
     }
-    // public function emailVerificationSuccess()
-    // {
-    //     // Kiểm tra xem người dùng đã đăng nhập hay chưa
-    //     if (Auth::check()) {
-    //         // Lấy thông tin người dùng đã đăng nhập
-    //         $user = Auth::user();
-    //         // Kiểm tra xem người dùng đã xác thực email chưa
-    //         if (!$user->hasVerifiedEmail()) {
-    //             // Xác thực email và lưu trữ thời gian xác thực thành công
-    //             $user->markEmailAsVerified();
-    
-    //             // Thực hiện lưu trữ thời gian xác thực vào cơ sở dữ liệu
-    //             $user->email_verified_at = now();
-    //             $user->save();
-    //             // Kích hoạt sự kiện EmailVerified
-    //             event(new EmailVerified($user));
-    
-    //             // Thực hiện hành động tiếp theo (chẳng hạn chuyển hướng hoặc thông báo thành công)
-    //             return redirect()->to('/');
-    //         } else {
-    //             // Người dùng đã xác thực email trước đó, không cần thực hiện gì cả
-    //         }
-    //     } else {
-    //         // Người dùng chưa đăng nhập, xử lý lỗi hoặc thông báo cho người dùng
-    //     }
-    // }
 }

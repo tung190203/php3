@@ -7,36 +7,23 @@
         <div class="row">
             <div class="col-lg-3"></div>
             <div class="col-lg-6">
-            <form action="" method="post">
+            @if (session('message'))
+            <div class="alert alert-success">
+                {{ session('message') }}
+            </div>
+            @endif
+            <form action="{{route('user.forgot')}}" method="post">
             @csrf
             <div class="heading">
                 Forgot
             </div>
             <div class="form-outline mb-4">
                 <label class="form-label">Email </label>
-                <input type="email" name="email" class="form-control" />
+                <input type="email" name="email" value="{{old('email')}}" class="form-control" />
             </div>
             <button type="submit" class="btn btn-dark btn-block mb-4">Send</button>
             <div>
-            <p style="margin-bottom: 10px;">Back to login <a href="/login">Login</a></p>
-            </div>
-            <div class="text-center">
-                <p style="margin-bottom: 20px;">or sign in with:</p>
-                <button type="button" class="btn btn-primary btn-floating mx-1">
-                    <i class="fa fa-facebook-f"></i>
-                </button>
-
-                <button type="button" class="btn btn-info btn-floating mx-1">
-                    <i class="fa fa-google"></i>
-                </button>
-
-                <button type="button" class="btn btn-primary btn-floating mx-1">
-                    <i class="fa fa-twitter"></i>
-                </button>
-
-                <button type="button" class="btn btn-secondary btn-floating mx-1">
-                    <i class="fa fa-github"></i>
-                </button>
+            <p style="margin-bottom: 10px;">Back to <a href="/login">Login</a></p>
             </div>
         </form>
             </div>
