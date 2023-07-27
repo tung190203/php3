@@ -71,5 +71,13 @@ class CouponController extends Controller
      Coupon::findOrFail($id)->delete();
     return redirect()->back()->with('success','Xóa mã giảm giá thành công');
     }
-
+    public function arrayDelete(Request $request ){
+        $array = $request->input('arraydelete');
+        if(!empty($array)){
+        Coupon::whereIn('id',$array)->delete();
+        }else{
+            return redirect()->back()->with('error','Coupon không tồn tại hoặc chưa được lựa chọn');    
+        }
+        return redirect()->back()->with('success','Đã xóa thành công');
+    }
 }

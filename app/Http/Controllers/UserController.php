@@ -114,6 +114,22 @@ class UserController extends Controller
        $user->delete();     
         return redirect()->back()->with('success','Xóa người dùng thành công !');
     }
+    public function arrayDelete(Request $request){
+        $array = $request->input('arraydelete');
+        if (!empty($array)) {
+            $users = User::whereIn('id', $array)->get();
+            $userIds = $users->pluck('id');
+            Bill::whereIn('user_id', $userIds)->delete();
+            Cart::whereIn('user_id', $userIds)->delete();
+            Comment::whereIn('user_id', $userIds)->delete();
+            $users->each(function ($user) {
+            $user->delete();
+            });
+            return redirect()->back()->with('success', 'Đã xóa thành công');
+        } else {
+            return redirect()->back()->with('error', 'User không tồn tại hoặc chưa được lựa chọn');
+        }
+    }
     public function editUser(){
         $id = request()->id;
         $user = User::findOrFail($id);

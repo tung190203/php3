@@ -121,7 +121,7 @@
                                             </svg>
                                         </button>
                                     </a>
-                                    <form action="{{route('bill.delete',['id'=>$bill->id])}}" method="POST">
+                                    <!-- <form action="{{route('bill.delete',['id'=>$bill->id])}}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button
@@ -134,7 +134,7 @@
                                                     clip-rule="evenodd"></path>
                                             </svg>
                                         </button>
-                                    </form>
+                                    </form> -->
                                 </div>
                             </td>
                         </tr>

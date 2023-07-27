@@ -39,4 +39,13 @@ class CategoryController extends Controller
         $category->update($request->all());
         return redirect()->to('/category-table')->with('success','Update dữ liệu thành công !');
     }
+    public function arrayDelete(Request $request ){
+        $array = $request->input('arraydelete');
+        if(!empty($array)){
+        Category::whereIn('id',$array)->delete();
+        }else{
+            return redirect()->back()->with('error','Comment không tồn tại hoặc chưa được lựa chọn');    
+        }
+        return redirect()->back()->with('success','Đã xóa thành công');
+    }
 }
