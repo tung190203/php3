@@ -99,7 +99,6 @@ class UserController extends Controller
     public function editprofile(Request $request ,$id){
         $user = User::find($id);
         $user->update($request->all());
-        $user->save();
         return redirect()->to('/home')->with('success','Update thành công !');
     }
     public function editprofilebill(Request $request ,$id){
