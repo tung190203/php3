@@ -39,7 +39,7 @@ use Illuminate\Support\Facades\Route;
     Route::get('/editCoupon',[CouponController::class,'editCoupon'])->name('coupon.edit');
     Route::patch('/updateCoupon/{id}',[CouponController::class,'updateCoupon'])->name('coupon.update');
     Route::post('/coupon-table',[CouponController::class,'search'])->name('coupon.search');
-    Route::delete('/coupondelete',[CouponController::class,'arrayDelete'])->name('coupon.deletearray');
+    ;
     //product-admin
     Route::get('/product-table',[ProductController::class,'tableProduct']);
     Route::post('/product-table',[ProductController::class,'search'])->name('product.search');
@@ -48,7 +48,6 @@ use Illuminate\Support\Facades\Route;
     Route::delete('/product-table/{id}',[ProductController::class,'delete'])->name('product.delete');
     Route::get('/editProduct',[ProductController::class,'editProduct'])->name('product.edit');
     Route::patch('/updateProduct/{id}',[ProductController::class,'updateProduct'])->name('product.update');
-    Route::delete('/productdelete',[ProductController::class,'arrayDelete'])->name('product.deletearray');
     //category-admin
     Route::get('/category-table',[CategoryController::class,'tableCategory']);
     Route::get('/category',[CategoryController::class,'category']);
@@ -56,7 +55,6 @@ use Illuminate\Support\Facades\Route;
     Route::delete('/category-table/{id}',[CategoryController::class,'delete'])->name('category.delete');
     Route::get('/editCategory',[CategoryController::class,'editCategory'])->name('category.edit');
     Route::patch('/updateCategory/{id}',[CategoryController::class,'updateCategory'])->name('category.update');
-    Route::delete('/categorydelete',[CategoryController::class,'arrayDelete'])->name('category.deletearray');
     //brand-admin
     Route::get('/brand-table',[BrandController::class,'tableBrand']);
     Route::get('/brand',[BrandController::class,'brand']);
@@ -64,19 +62,17 @@ use Illuminate\Support\Facades\Route;
     Route::delete('/brand-table/{id}', [BrandController::class,'delete'])->name('brand.delete');
     Route::get('/editBrand',[BrandController::class,'editBrand'])->name('brand.edit');
     Route::patch('/updateBrand/{id}',[BrandController::class,'updateBrand'])->name('brand.update');
-    //delete array
-    Route::delete('/branddelete',[BrandController::class,'arrayDelete'])->name('brand.deletearray');
     //user-admin
     Route::get('/user-table',[UserController::class,'tableUser']);
     Route::post('/user-table',[UserController::class,'search'])->name('user.search');
     Route::delete('/user-table/{id}',[UserController::class,'delete'])->name('user.delete');
     Route::get('/editUser',[UserController::class,'editUser'])->name('user.edit');
     Route::patch('/updateUser/{id}',[UserController::class,'updateUser'])->name('user.update');
-    Route::delete('/userdelete',[UserController::class,'arrayDelete'])->name('user.deletearray');
+    
     //comment-admin
     Route::get('/comment-table',[CommentController::class,'tableComment']);
     Route::delete('/comment-table/{id}',[CommentController::class,'delete'])->name('comment.delete');
-    Route::delete('/commentdelete',[CommentController::class,'arrayDelete'])->name('comment.deletearray');
+    
     //export
     Route::get('/export-users', [ExportController::class,'exportUsers']);
     Route::get('/export-bills',[ExportController::class,'exportBills']);

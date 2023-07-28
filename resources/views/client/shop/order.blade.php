@@ -230,6 +230,7 @@
                             <div id="elementToToggle" class="d-none">
                                 <em style="font-size: 12px;">*Vui lòng thanh toán bằng cách quét mã QR </em>
                                 <img width="100%" src="assets/images/z4555328090387_9140c5f3a4f46ba80ed04283954dcb70.jpg" alt="ảnh">
+                                <em style="font-size: 12px;">*Nếu có gian lận trong quá trình thanh toán tài khoản sẽ bị khóa  </em>
                             </div>
                         </div>
                         <div class="mb-3">

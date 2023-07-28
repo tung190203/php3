@@ -172,12 +172,12 @@
                         <div class="row">
                           <div class="col-lg-5">
                             <fieldset>
-                              <input name="name" type="text" id="name" placeholder="Your Name" required="">
+                              <input name="name" type="text" id="name" placeholder="Your Name" required="" value="{{Auth::user()->name}}">
                             </fieldset>
                           </div>
                           <div class="col-lg-5">
                             <fieldset>
-                              <input name="email" type="text" id="email" pattern="[^ @]*@[^ @]*" placeholder="Your Email Address" required="">
+                              <input name="email" type="text" id="email" pattern="[^ @]*@[^ @]*" placeholder="Your Email Address" required="" value="{{Auth::user()->email}}">
                             </fieldset>
                           </div>
                           <div class="col-lg-2">

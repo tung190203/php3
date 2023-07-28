@@ -27,6 +27,8 @@ class UserController extends Controller
     public function sendResetLinkEmail(Request $request){
         $request->validate(['email' => 'required|email']);
         $email = $request->input('email');
+        $user= User::where('email', $email)->first();
+        if($user){
         $token = Str::random(64);
         DB::table('password_reset_tokens')->insert([
             'email'=>$email,
@@ -36,6 +38,9 @@ class UserController extends Controller
         $resetLink = url('/reset-password/'.$token);
         Mail::to($email)->send(new ResetPasswordMail($resetLink));
         return redirect()->back()->withInput()->with('message', 'Yêu cầu đặt lại mật khẩu đã được gửi đến email của bạn.');
+    }else{
+        return redirect()->back()->withInput()->with('error','Email này chưa được đăng kí! Vui lòng thử lại');
+    }
     }
     public function showResetPasswordForm($token){
         return view('client.user.resend_password_mail', compact('token'));

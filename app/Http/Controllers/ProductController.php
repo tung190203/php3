@@ -61,15 +61,6 @@ class ProductController extends Controller
         Product::findOrFail($id)->delete();
         return redirect()->back()->with('success','Đã xóa thành công !');
     }
-    public function arrayDelete(Request $request ){
-        $array = $request->input('arraydelete');
-        if(!empty($array)){
-        Product::whereIn('id',$array)->delete();
-        }else{
-            return redirect()->back()->with('error','Product không tồn tại hoặc chưa được lựa chọn');    
-        }
-        return redirect()->back()->with('success','Đã xóa thành công');
-    }
     public function editProduct(){
         $id = request()->id;
         $product = Product::with('brand','category')->findOrFail($id);

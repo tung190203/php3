@@ -30,16 +30,17 @@
                         <h2>Say Hello. Don't Be Shy!</h2>
                         <span>Send feedback to help us understand customers better</span>
                     </div>
-                    <form id="contact" action="" method="">
+                    <form id="contact" action="" method="post">
+                      @csrf
                         <div class="row">
                           <div class="col-lg-6">
                             <fieldset>
-                              <input name="name" type="text" id="name" placeholder="Your name" required="">
+                              <input name="name" type="text" id="name" placeholder="Your name" required="" value="{{Auth::user()->name}}">
                             </fieldset>
                           </div>
                           <div class="col-lg-6">
                             <fieldset>
-                              <input name="email" type="text" id="email" placeholder="Your email" required="">
+                              <input name="email" type="text" id="email" placeholder="Your email" required="" value="{{Auth::user()->email}}">
                             </fieldset>
                           </div>
                           <div class="col-lg-12">
@@ -49,7 +50,7 @@
                           </div>
                           <div class="col-lg-12">
                             <fieldset>
-                              <button type="submit" id="form-submit" class="main-dark-button" onclick="alert('Successfull !')"><i class="fa fa-paper-plane"></i></button>
+                              <button type="submit" id="form-submit" class="main-dark-button"><i class="fa fa-paper-plane"></i></button>
                           </div>
                         </div>
                       </form>
@@ -72,12 +73,12 @@
                         <div class="row">
                           <div class="col-lg-5">
                             <fieldset>
-                              <input name="name" type="text" id="name" placeholder="Your Name" required="">
+                              <input name="name" type="text" id="name" placeholder="Your Name" required="" value="{{Auth::user()->name}}">
                             </fieldset>
                           </div>
                           <div class="col-lg-5">
                             <fieldset>
-                              <input name="email" type="text" id="email" pattern="[^ @]*@[^ @]*" placeholder="Your Email Address" required="">
+                              <input name="email" type="text" id="email" pattern="[^ @]*@[^ @]*" placeholder="Your Email Address" required="" value="{{Auth::user()->email}}">
                             </fieldset>
                           </div>
                           <div class="col-lg-2">
