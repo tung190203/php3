@@ -14,15 +14,15 @@
 </div>
 <div class="about-us">
     <div class="container">
-    @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-            @elseif (session('error'))
-            <div class="alert alert-danger">
-                {{ session('error') }}
-            </div>
-            @endif
+        @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+        @elseif (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+        @endif
         <div class="row">
             <label for="" style="margin-bottom: 20px;">
                 <h4 style="margin-left: 15px;">Product Detail</h4>
@@ -46,201 +46,221 @@
                     </tbody>
                 </table>
                 <div class="row">
-                        @else
-                        <table class="table">
-                            <thead>
-                                <th>ID Cart</th>
-                                <th>Product Name</th>
-                                <th>Product Image</th>
-                                <th>Price</th>
-                                <th>Amount</th>
-                                <th>Size</th>
-                                <th>Action</th>
-                            </thead>
-                            <tbody>
-                                @foreach($product as $pro)
-                                <tr>
+                    @else
+                    <table class="table">
+                        <thead>
+                            <th>ID Cart</th>
+                            <th>Product Name</th>
+                            <th>Product Image</th>
+                            <th>Price</th>
+                            <th>Amount</th>
+                            <th>Size</th>
+                            <th>Action</th>
+                        </thead>
+                        <tbody>
+                            @foreach($product as $pro)
+                            <tr>
 
-                                    <td>{{$pro->id}}</td>
-                                    <td class="bill_name">{{$pro->name}}</td>
-                                    <td><img width="100" src="uploads/{{$pro->images}}" alt=""></td>
-                                    <td>{{$pro->price}}</td>
-                                    <td>{{$pro->product_amount}}</td>
-                                    <td>{{$pro->product_size}}</td>
-                                    <td>
-                                        <form action="{{route('cart.delete',['id'=>$pro->id])}}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="Orderbutton">Xóa</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                                <td>{{$pro->id}}</td>
+                                <td class="bill_name">{{$pro->name}}</td>
+                                <td><img width="100" src="uploads/{{$pro->images}}" alt=""></td>
+                                <td>{{$pro->price}}</td>
+                                <td>{{$pro->product_amount}}</td>
+                                <td>{{$pro->product_size}}</td>
+                                <td>
+                                    <form action="{{route('cart.delete',['id'=>$pro->id])}}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="Orderbutton">Xóa</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
-                <div style="margin-top: 20px;margin-bottom:20px">
-                    <form action="{{ route('coupon.apply')}}" class="row" method="POST">
-                        @csrf
-                        <div class="col-lg-9">
-                        <input type="text" id="coupon" name="code" placeholder="Enter coupon code">    
-                        </div>
-                        <div class="col-lg-3">
+            </div>
+            <div style="margin-top: 20px;margin-bottom:20px">
+                <form action="{{ route('coupon.apply')}}" class="row" method="POST">
+                    @csrf
+                    <div class="col-lg-9">
+                        <input type="text" id="coupon" name="code" placeholder="Enter coupon code">
+                    </div>
+                    <div class="col-lg-3">
                         <button type="submit" class="Applycoupon">Apply Coupon Code</button>
+                    </div>
+                </form>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <label for="" style="margin-bottom: 20px" class="row">
+                        <div class="col-lg-3"></div>
+                        <h4 class="col-lg-6">User Information</h4>
+                        <div class="col-lg-3"></div>
+                    </label>
+                    <form class="forminfo" action="{{route('bill.updateprofile',['id'=>$user->id])}}" method="post">
+                        @csrf
+                        @method('PATCH')
+                        <div class="mb-3">
+                            <label class="form-label">Username</label>
+                            <input type="text" class="form-control" disabled value="{{$user->name}}">
                         </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="text" class="form-control" disabled value="{{$user->email}}">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Phone</label>
+                            <input type="text" class="form-control" name="phone" value="{{$user->phone}}">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Address</label>
+                            <input type="text" class="form-control" name="address" value="{{$user->address}}">
+                        </div>
+                        <button type="submit" class="Orderbutton" style="text-align:center">Submit</button>
                     </form>
                 </div>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <label for="" style="margin-bottom: 20px" class="row">
-                            <div class="col-lg-3"></div>
-                            <h4 class="col-lg-6">User Information</h4>
-                            <div class="col-lg-3"></div>
-                        </label>
-                        <form class="forminfo" action="{{route('bill.updateprofile',['id'=>$user->id])}}" method="post">
-                            @csrf
-                            @method('PATCH')
-                            <div class="mb-3">
-                                <label class="form-label">Username</label>
-                                <input type="text" class="form-control" disabled value="{{$user->name}}">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Email</label>
-                                <input type="text" class="form-control" disabled value="{{$user->email}}">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Phone</label>
-                                <input type="text" class="form-control" name="phone" value="{{$user->phone}}">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Address</label>
-                                <input type="text" class="form-control" name="address"  value="{{$user->address}}">
-                            </div>
-                            <button type="submit" class="Orderbutton" style="text-align:center">Submit</button>
-                        </form>
-                    </div>
-                    <div class="col-lg-2"></div>
-                    <div class="col-lg-4">
-                        <label for="" style="margin-bottom: 20px" class="row">
-                            <div class="col-lg-3"></div>
-                            <h4 class="col-lg-6">Order Detail</h4>
-                            <div class="col-lg-3"></div>
-                        </label>
-                        <form class="forminfo1" action="{{route('bill.order',['id'=>$pro->user_id])}}" method="post">
-                            @csrf
-                            @foreach($product as $pro)
-                            <input type="hidden" name="cart_id[]" value="{{$pro->id}}">
-                            @endforeach
-                            <div class="mb-4">
-                                <div class="row">
-                                    <div class="col-lg-9">
-                                        <label for="">Product</label>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <label for="">Price</label>
-                                    </div>
+                <div class="col-lg-2"></div>
+                <div class="col-lg-4">
+                    <label for="" style="margin-bottom: 20px" class="row">
+                        <div class="col-lg-3"></div>
+                        <h4 class="col-lg-6">Order Detail</h4>
+                        <div class="col-lg-3"></div>
+                    </label>
+                    <form class="forminfo1" action="{{route('bill.order',['id'=>$pro->user_id])}}" method="post">
+                        @csrf
+                        @foreach($product as $pro)
+                        <input type="hidden" name="cart_id[]" value="{{$pro->id}}">
+                        @endforeach
+                        <div class="mb-4">
+                            <div class="row">
+                                <div class="col-lg-9">
+                                    <label for="">Product</label>
+                                </div>
+                                <div class="col-lg-3">
+                                    <label for="">Price</label>
                                 </div>
                             </div>
-                            <!--list hàng-->
-                            @foreach($product as $pro)
-                            <div class="mb-3">
-                                <div class="row">
-                                    <div class="col-lg-9">
-                                        <p>{{$pro->name}}(x{{$pro->product_amount}})({{$pro->product_size}})</p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p>${{$pro->product_amount * $pro->price}}</p>
-                                    </div>
+                        </div>
+                        <!--list hàng-->
+                        @foreach($product as $pro)
+                        <div class="mb-3">
+                            <div class="row">
+                                <div class="col-lg-9">
+                                    <p>{{$pro->name}}(x{{$pro->product_amount}})({{$pro->product_size}})</p>
+                                </div>
+                                <div class="col-lg-3">
+                                    <p>${{$pro->product_amount * $pro->price}}</p>
                                 </div>
                             </div>
-                            @endforeach
-                            <!--tổng tiền-->
-                            <div class="mb-3">
-                                <div class="row">
-                                    <div class="col-lg-9">
-                                        <p>Shipping</p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p>$3</p>
-                                    </div>
+                        </div>
+                        @endforeach
+                        <!--tổng tiền-->
+                        <div class="mb-3">
+                            <div class="row">
+                                <div class="col-lg-9">
+                                    <p>Shipping</p>
+                                </div>
+                                <div class="col-lg-3">
+                                    <p>$3</p>
                                 </div>
                             </div>
-                            <div class="mb-3">
-                                <div class="row">
-                                    <div class="col-lg-9">
-                                        <p>Coupon</p>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        @if(session()->has('couponValue'))
-                                        <p>-${{session('couponValue')}}</p>
-                                        @else
-                                        <p>-$0</p>
-                                        @endif
-                                    </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="row">
+                                <div class="col-lg-9">
+                                    <p>Coupon</p>
+                                </div>
+                                <div class="col-lg-3">
+                                    @if(session()->has('couponValue'))
+                                    <p>-${{session('couponValue')}}</p>
+                                    @else
+                                    <p>-$0</p>
+                                    @endif
                                 </div>
                             </div>
-                            <div class="mb-3">
-                                <hr>
-                                <div class="row">
-                                    <div class="col-lg-9">
-                                        <p>Total</p>
-                                    </div>
-                                    @php
-                                    $totalAmount = 0;
-                                    @endphp
+                        </div>
+                        <div class="mb-3">
+                            <hr>
+                            <div class="row">
+                                <div class="col-lg-9">
+                                    <p>Total</p>
+                                </div>
+                                @php
+                                $totalAmount = 0;
+                                @endphp
 
-                                    @foreach($product as $pro)
-                                    @php
-                                    $price = ($pro->product_amount * $pro->price) + 3; // Tính giá trị của sản phẩm
-                                    $totalAmount += $price; // Cộng giá trị sản phẩm vào tổng
-                                    @endphp
-                                    @endforeach
-                                    <div class="col-lg-3">
-                                        
-                                        @if(session()->has('couponValue'))
-                                        <input type="hidden" name="total" value="{{$totalAmount - session('couponValue')}}">
-                                        <p>${{$totalAmount - session('couponValue')}}</p>
-                                        @else
-                                        <input type="hidden" name="total" value="{{$totalAmount}}">
-                                        <p>${{$totalAmount}}</p>
-                                        @endif
-                                    </div>
+                                @foreach($product as $pro)
+                                @php
+                                $price = ($pro->product_amount * $pro->price) + 3; // Tính giá trị của sản phẩm
+                                $totalAmount += $price; // Cộng giá trị sản phẩm vào tổng
+                                @endphp
+                                @endforeach
+                                <div class="col-lg-3">
+
+                                    @if(session()->has('couponValue'))
+                                    <input type="hidden" name="total" value="{{$totalAmount - session('couponValue')}}">
+                                    <p>${{$totalAmount - session('couponValue')}}</p>
+                                    @else
+                                    <input type="hidden" name="total" value="{{$totalAmount}}">
+                                    <p>${{$totalAmount}}</p>
+                                    @endif
                                 </div>
                             </div>
-                            <div class="mb-3">
-                                <div class="payment_item">
-                                    <div class="radion_btn">
-                                        <input type="radio" checked name="pttt" value="Thanh toán khi nhận hàng">
-                                        <label for="f-option5">Check payments</label>
-                                        <div class="check"></div>
-                                    </div>
-                                </div>
-                                <div class="payment_item active mt-2 ">
-                                    <div class="radion_btn">
-                                        <input type="radio" name="pttt" value="Chuyển tiền online">
-                                        <label for="f-option6">Paypal </label>
-                                        <div class="check"></div>
-                                    </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="payment_item">
+                                <div class="radion_btn">
+                                    <input type="radio" checked name="pttt" value="Thanh toán khi nhận hàng"
+                                        onclick="toggleElement(false)">
+                                    <label for="f-option5">Check payments</label>
+                                    <div class="check"></div>
                                 </div>
                             </div>
-                            <div class="mb-3">
-                                <button type="submit" class="Orderbutton2">Order Confirmation</button>
+                            <div class="payment_item active mt-2 ">
+                                <div class="radion_btn">
+                                    <input type="radio" name="pttt" value="Chuyển tiền online"
+                                        onclick="toggleElement(true)">
+                                    <label for="f-option6">Paypal </label>
+                                    <div class="check"></div>
+                                </div>
                             </div>
-                        </form>
-                        @endif
-                    </div>
+                        </div>
+                        <div class="mb-3">
+                            <div id="elementToToggle" class="d-none">
+                                <em style="font-size: 12px;">*Vui lòng thanh toán bằng cách quét mã QR </em>
+                                <img width="100%" src="assets/images/z4555328090387_9140c5f3a4f46ba80ed04283954dcb70.jpg" alt="ảnh">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <button type="submit" class="Orderbutton2">Order Confirmation</button>
+                        </div>
+                    </form>
+                    @endif
                 </div>
             </div>
         </div>
-        </div>
-        <script>
-        function importCSS(url) {
-            var link = document.createElement("link");
-            link.rel = "stylesheet";
-            link.href = url;
-            document.getElementsByTagName("head")[0].appendChild(link);
-        }
-        importCSS("assets/css/textcontent.css");
-        </script>
-        @endsection
+    </div>
+</div>
+<script>
+function importCSS(url) {
+    var link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = url;
+    document.getElementsByTagName("head")[0].appendChild(link);
+}
+importCSS("assets/css/textcontent.css");
+const elementToToggle = document.getElementById("elementToToggle");
+const showRadio = document.querySelector('input[value="show"]');
+const hideRadio = document.querySelector('input[value="hide"]');
+
+function toggleElement(show) {
+    if (show) {
+        elementToToggle.classList.remove("d-none");
+    } else {
+        elementToToggle.classList.add("d-none");
+    }
+}
+toggleElement(false);
+</script>
+@endsection

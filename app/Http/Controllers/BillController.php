@@ -57,7 +57,8 @@ class BillController extends Controller
                 }
                 }    
             }
-            return redirect()->to('/bill-confirm');
+                return redirect()->to('/bill-confirm');
+            
         }else{
             return redirect()->back()->with('false','Đặt đơn không thành công !');
         }

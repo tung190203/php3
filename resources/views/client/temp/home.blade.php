@@ -55,7 +55,7 @@
                                              <p>Lorem ipsum dolor sit amet, conservisii ctetur adipiscing elit incid.
                                              </p>
                                              <div class="main-border-button">
-                                                 <a href="#man">Discover More</a>
+                                                 <a href="#men">Discover More</a>
                                              </div>
                                          </div>
                                      </div>
@@ -359,13 +359,13 @@
                      <div class="row">
                          <div class="col-lg-5">
                              <fieldset>
-                                 <input name="name" type="text" id="name" placeholder="Your Name" required="">
+                                 <input name="name" type="text" id="name" placeholder="Your Name" value="{{Auth::user()->name}}" required>
                              </fieldset>
                          </div>
                          <div class="col-lg-5">
                              <fieldset>
                                  <input name="email" type="text" id="email" pattern="[^ @]*@[^ @]*"
-                                     placeholder="Your Email Address" required="">
+                                     placeholder="Your Email Address" required value="{{Auth::user()->email}}">
                              </fieldset>
                          </div>
                          <div class="col-lg-2">
@@ -382,14 +382,14 @@
                      <div class="col-6">
                          <ul>
                              <li>Store Location:<br><span>Sunny Isles Beach, FL 33160, United States</span></li>
-                             <li>Phone:<br><span>010-020-0340</span></li>
-                             <li>Office Location:<br><span>North Miami Beach</span></li>
+                             <li>Phone:<br><span>(+84) 869-888-319</span></li>
+                             <li>Office Location:<br><span>Trịnh Văn Bô - FPT Polytechnic</span></li>
                          </ul>
                      </div>
                      <div class="col-6">
                          <ul>
                              <li>Work Hours:<br><span>07:30 AM - 9:30 PM Daily</span></li>
-                             <li>Email:<br><span>info@company.com</span></li>
+                             <li>Email:<br><span>Hexashop.team@gmail.com</span></li>
                              <li>Social Media:<br><span><a href="#">Facebook</a>, <a href="#">Instagram</a>, <a
                                          href="#">Behance</a>, <a href="#">Linkedin</a></span></li>
                          </ul>
