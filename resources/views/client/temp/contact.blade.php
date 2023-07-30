@@ -33,16 +33,29 @@
                     <form id="contact" action="" method="post">
                       @csrf
                         <div class="row">
-                          <div class="col-lg-6">
+                         @if(Auth::user())
+                         <div class="col-lg-6">
                             <fieldset>
-                              <input name="name" type="text" id="name" placeholder="Your name" required="" value="{{Auth::user()->name}}">
+                              <input name="name" type="text" id="name" placeholder="Your name" required value="{{Auth::user()->name}}">
                             </fieldset>
                           </div>
                           <div class="col-lg-6">
                             <fieldset>
-                              <input name="email" type="text" id="email" placeholder="Your email" required="" value="{{Auth::user()->email}}">
+                              <input name="email" type="text" id="email" placeholder="Your email" required value="{{Auth::user()->email}}">
                             </fieldset>
                           </div>
+                          @else
+                          <div class="col-lg-6">
+                            <fieldset>
+                              <input name="name" type="text" id="name" placeholder="Your name" required>
+                            </fieldset>
+                          </div>
+                          <div class="col-lg-6">
+                            <fieldset>
+                              <input name="email" type="text" id="email" placeholder="Your email" required>
+                            </fieldset>
+                          </div>
+                          @endif
                           <div class="col-lg-12">
                             <fieldset>
                               <textarea name="message" rows="6" id="message" placeholder="Your message" required=""></textarea>
@@ -71,6 +84,7 @@
                     </div>
                     <form id="subscribe" action="" method="get">
                         <div class="row">
+                          @if(Auth::user())
                           <div class="col-lg-5">
                             <fieldset>
                               <input name="name" type="text" id="name" placeholder="Your Name" required="" value="{{Auth::user()->name}}">
@@ -81,6 +95,18 @@
                               <input name="email" type="text" id="email" pattern="[^ @]*@[^ @]*" placeholder="Your Email Address" required="" value="{{Auth::user()->email}}">
                             </fieldset>
                           </div>
+                          @else
+                          <div class="col-lg-5">
+                            <fieldset>
+                              <input name="name" type="text" id="name" placeholder="Your Name" required>
+                            </fieldset>
+                          </div>
+                          <div class="col-lg-5">
+                            <fieldset>
+                              <input name="email" type="text" id="email" pattern="[^ @]*@[^ @]*" placeholder="Your Email Address" required>
+                            </fieldset>
+                          </div>
+                          @endif
                           <div class="col-lg-2">
                             <fieldset>
                               <button type="submit" id="form-submit" class="main-dark-button"><i class="fa fa-paper-plane"></i></button>

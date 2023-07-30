@@ -79,9 +79,6 @@ use Illuminate\Support\Facades\Route;
     Route::get('/export-products',[ExportController::class,'exportProducts']);
     Route::get('/export-bill-confirm',[ExportController::class,'exportBillConfirm'])->name('bill.export');
 });
-    //verify-email
-    Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/unauthorized', function () {return view('404');})->name('unauthorized');
     //Home
     Route::get('/',[HomeController::class ,'index']);
     Route::get('/home',[HomeController::class ,'index']);
@@ -92,8 +89,12 @@ use Illuminate\Support\Facades\Route;
     Route::get('/shop',[HomeController::class ,'shop']);
     Route::get('/man',[HomeController::class ,'man']);
     Route::get('/woman',[HomeController::class ,'woman']);
-    //bill &cart home
     Route::get('/detail',[HomeController::class,'detail'])->name('product.detail');
+    //verify-email
+    Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/unauthorized', function () {return view('404');})->name('unauthorized');
+    
+    //bill &cart home
     Route::post('/addCart',[CartController::class,'addCart'])->name('product.addcart');
     Route::get('/order',[BillController::class,'order'])->name('product.order');
     Route::delete('/cart/{id}',[CartController::class,'delete'])->name('cart.delete');

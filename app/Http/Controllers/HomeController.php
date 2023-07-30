@@ -27,7 +27,7 @@ class HomeController extends Controller
     }
     public function detail(){
         $id = request()->id;
-        $product = Product::findOrFail($id);
+        $product = Product::with('brand','category')->findOrFail($id);
         $sameProducts = Product::where('category_id',$product['category_id'])->get();
         $comment = Comment::with('user')->where('product_id',$id)->get();
         return view('client.shop.detail',compact('product','sameProducts','comment'));

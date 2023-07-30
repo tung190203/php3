@@ -35,28 +35,12 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <p>Category:
-                                    @php
-                                    $category = '';
-                                    if($product->category_id==1){
-                                    $category = 'Man clothes';
-                                    }elseif($product->category_id ==2){
-                                    $category= 'Woman clothes';
-                                    }else{
-                                    $category = 'Unisex clothes';
-                                    };
-                                    $brand = '';
-                                    if ($product->brand_id == 1) {
-                                    $brand = 'Dior';
-                                    } elseif ($product->brand_id == 2) {
-                                    $brand = 'Dolce';
-                                    }
-                                    @endphp
-                                    <strong style="color:black">{{$category}}</strong>
+                                    <strong style="color:black">{{$product->category->name}}</strong>
                                 </p>
                             </div>
                             <div class="col-lg-6">
                                 <p style="margin-bottom:20px">Brand:
-                                    <strong style="color:black">{{$brand}}</strong>
+                                    <strong style="color:black">{{$product->brand->brand_name}}</strong>
                                 </p>
                             </div>
                         </div>
@@ -143,7 +127,8 @@
                                     <i style="margin-right: 2px;" class="fa fa-comment me-3"></i>
                                     <p class="mb-0">Comment</p>
                                 </a>
-                                <a href="#!" style="margin-right: 20px;" class="d-flex align-items-center me-3">
+                                <div id="replyForm" style="display: none;"></div>
+                                <a href="#!" class="d-flex align-items-center me-3">
                                     <i style="margin-right: 2px;" class="fa fa-share me-3"></i>
                                     <p class="mb-0">Share</p>
                                 </a>

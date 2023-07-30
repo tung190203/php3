@@ -170,7 +170,8 @@
                     </div>
                     <form id="subscribe" action="" method="get">
                         <div class="row">
-                          <div class="col-lg-5">
+                         @if(Auth::user())
+                         <div class="col-lg-5">
                             <fieldset>
                               <input name="name" type="text" id="name" placeholder="Your Name" required="" value="{{Auth::user()->name}}">
                             </fieldset>
@@ -180,6 +181,18 @@
                               <input name="email" type="text" id="email" pattern="[^ @]*@[^ @]*" placeholder="Your Email Address" required="" value="{{Auth::user()->email}}">
                             </fieldset>
                           </div>
+                          @else
+                          <div class="col-lg-5">
+                            <fieldset>
+                              <input name="name" type="text" id="name" placeholder="Your Name" required="" >
+                            </fieldset>
+                          </div>
+                          <div class="col-lg-5">
+                            <fieldset>
+                              <input name="email" type="text" id="email" pattern="[^ @]*@[^ @]*" placeholder="Your Email Address" required="">
+                            </fieldset>
+                          </div>
+                          @endif
                           <div class="col-lg-2">
                             <fieldset>
                               <button type="submit" id="form-submit" class="main-dark-button" onclick="alert('Successful registration ! \n We will contact you soon')"><i class="fa fa-paper-plane"></i></button>

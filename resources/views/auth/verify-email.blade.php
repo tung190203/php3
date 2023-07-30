@@ -54,7 +54,7 @@
         <p>If you didn't receive the email, please check your spam folder or request a new verification link.</p>
         <form action="{{route('verification.send')}}" method="POST">
             @csrf
-            <button type="submit" class="verify-button">Verify Email</button>
+            <button type="submit" class="verify-button">Verify Again</button>
         </form>
         </div>
     </div>
