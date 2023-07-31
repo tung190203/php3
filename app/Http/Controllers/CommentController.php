@@ -24,13 +24,5 @@ class CommentController extends Controller
         Comment::findOrFail($id)->delete();
         return redirect()->back()->with('success','Xóa bình luận thành công');
     }
-    public function arrayDelete(Request $request ){
-        $array = $request->input('arraydelete');
-        if(!empty($array)){
-        Comment::whereIn('id',$array)->delete();
-        }else{
-            return redirect()->back()->with('error','Comment không tồn tại hoặc chưa được lựa chọn');    
-        }
-        return redirect()->back()->with('success','Đã xóa thành công');
-    }
+   
 }
