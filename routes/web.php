@@ -39,7 +39,6 @@ use Illuminate\Support\Facades\Route;
     Route::get('/editCoupon',[CouponController::class,'editCoupon'])->name('coupon.edit');
     Route::patch('/updateCoupon/{id}',[CouponController::class,'updateCoupon'])->name('coupon.update');
     Route::post('/coupon-table',[CouponController::class,'search'])->name('coupon.search');
-    ;
     //product-admin
     Route::get('/product-table',[ProductController::class,'tableProduct']);
     Route::post('/product-table',[ProductController::class,'search'])->name('product.search');

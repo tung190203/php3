@@ -123,6 +123,4 @@ class BillController extends Controller
         return redirect()->to('/login');
     }
     }
-  
-
 }
