@@ -10,7 +10,7 @@ class HomeController extends Controller
      */
     public function index(){
         $productw = Product::gender('Female')->get();
-        $products = Product::gender('Male')->get();
+        $products = Product::gender('Male')->get();       
         return view('client.temp.home', compact('products', 'productw'));
     }
     public function man(){
