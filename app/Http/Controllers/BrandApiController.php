@@ -60,7 +60,6 @@ class BrandApiController extends Controller
     public function update(Request $request, Brand $brand){
         //không có ảnh
         $brand->update($request->all());
-        // dd($request->all());
         //nếu có ảnh
         // $image = $request->file('image')->getClientOriginalName();
         // $request->file('image')->stogeAs('public/uploads',$image);

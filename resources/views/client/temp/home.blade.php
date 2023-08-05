@@ -260,7 +260,6 @@
      </div>
  </section>
  <!-- ***** Explore Area Ends ***** -->
-
  <!-- ***** Social Area Starts ***** -->
  <section class="section" id="social">
      <div class="container">
