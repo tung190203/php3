@@ -54,7 +54,7 @@
                                 <p>{{$ct->product_size}}</p>
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                $ {{$ct->product_amount * $ct->price}}
+                                $ {{($ct->product_amount * $ct->price) +3}}
                             </td>
                         </tr>
                         @endforeach
