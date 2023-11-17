@@ -28,7 +28,6 @@
                             <th class="px-4 py-3"> Product Name</th>
                             <th class="px-4 py-3">Images</th>
                             <th class="px-4 py-3">Amount</th>
-                            <th class="px-4 py-3">Size</th>
                             <th class="px-4 py-3">Total</th>
                            
                         </tr>
@@ -49,9 +48,6 @@
                             </td>
                             <td class="px-4 py-3 text-sm">
                                 <p>{{$ct->product_amount}} products</p>
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                <p>{{$ct->product_size}}</p>
                             </td>
                             <td class="px-4 py-3 text-sm">
                                 $ {{($ct->product_amount * $ct->price) +3}}

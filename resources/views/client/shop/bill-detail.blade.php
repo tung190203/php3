@@ -32,7 +32,6 @@
                         <th>Product Name</th>
                         <th>Images</th>
                         <th>Amount</th>
-                        <th>Size</th>
                         <th>Total</th>
                     </thead>
                     <tbody>
@@ -42,7 +41,6 @@
                             <td>{{$ct->name}}</td>
                             <td><img width="100" height="100" src="uploads/{{$ct->images}}"></td>
                             <td>{{$ct->product_amount}} products</td>
-                            <td>{{$ct->product_size}}</td>
                             <td>$ {{$ct->product_amount * $ct->price}}</td>
                         </tr>
                         @endforeach

@@ -64,53 +64,16 @@
                         </label>
                     </form>
                 </div>
-                <div class="mt-4 text-sm">
-                    <span class="text-gray-700 dark:text-gray-400">
-                        Gender
-                    </span>
-                    @if($product->gender== 'Male'){
-                        <div class="mt-2">
-                        <label class="inline-flex items-center text-gray-600 dark:text-gray-400">
-                            <input type="radio"
-                                class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-                                name="gender" value="Male" checked />
-                            <span class="ml-2">Male</span>
-                        </label>
-                        <label class="inline-flex items-center ml-6 text-gray-600 dark:text-gray-400">
-                            <input type="radio"
-                                class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-                                name="gender" value="Female" />
-                            <span class="ml-2">Female</span>
-                        </label>
-                    </div>
-                    }
-                    @else{
-                        <div class="mt-2">
-                        <label class="inline-flex items-center text-gray-600 dark:text-gray-400">
-                            <input type="radio"
-                                class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-                                name="gender" value="Male"/>
-                            <span class="ml-2">Male</span>
-                        </label>
-                        <label class="inline-flex items-center ml-6 text-gray-600 dark:text-gray-400">
-                            <input type="radio"
-                                class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-                                name="gender" value="Female" checked/>
-                            <span class="ml-2">Female</span>
-                        </label>
-                    </div>
-                    }
-                   @endif
-                </div>
+               
                 <label class="block mt-4 text-sm">
                     <span class="text-gray-700 dark:text-gray-400">
-                        Brand
+                        Author
                     </span>
-                    <select name="brand_id"
+                    <select name="author_id"
                         class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
-                        <option value="{{$product->brand->id}}">{{$product->brand->brand_name}}</option>
-                        @foreach($brand as $br)
-                        <option value="{{$br->id}}">{{$br->brand_name}}</option> 
+                        <option value="{{$product->author->id}}">{{$product->author->name}}</option>
+                        @foreach($author as $au)
+                        <option value="{{$au->id}}">{{$au->name}}</option> 
                         @endforeach
                     </select>
 
@@ -128,43 +91,6 @@
                         @endforeach
                     </select>
                 </label>
-                <div class="mt-4 text-sm">
-                    <span class="text-gray-700 dark:text-gray-400">
-                        Size
-                    </span>
-                    <div class="mt-2">
-                        <label class="inline-flex items-center text-gray-600 dark:text-gray-400" style="margin-right: 50px;">
-                            <input type="checkbox"
-                                class="text-purple-600 form-checkbox focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-                                name="size[]" value="S" />
-                            <span class="ml-2">S</span>
-                        </label>
-                        <label class="inline-flex items-center text-gray-600 dark:text-gray-400" style="margin-right: 50px;">
-                            <input type="checkbox"
-                                class="text-purple-600 form-checkbox focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-                                name="size[]" value="M"/>
-                            <span class="ml-2">M</span>
-                        </label>
-                        <label class="inline-flex items-center text-gray-600 dark:text-gray-400" style="margin-right: 50px;">
-                            <input type="checkbox"
-                                class="text-purple-600 form-checkbox focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-                                name="size[]" value="L" />
-                            <span class="ml-2">L</span>
-                        </label>
-                        <label class="inline-flex items-center text-gray-600 dark:text-gray-400" style="margin-right: 50px;">
-                            <input type="checkbox"
-                                class="text-purple-600 form-checkbox focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-                                name="size[]" value="XL" />
-                            <span class="ml-2">XL</span>
-                        </label>
-                        <label class="inline-flex items-center text-gray-600 dark:text-gray-400" style="margin-right: 50px;">
-                            <input type="checkbox"
-                                class="text-purple-600 form-checkbox focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-                                name="size[]" value="XXL" />
-                            <span class="ml-2">XXL</span>
-                        </label>
-                    </div>
-                </div>
                 <div class="mt-4 text-sm">
                     <button type="submit"
                         class="px-4  py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">

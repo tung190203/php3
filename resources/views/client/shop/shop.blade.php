@@ -17,6 +17,7 @@
     </div>
 </div>
 <!-- ***** Main Banner Area End ***** -->
+
 <!-- ***** Products Area Starts ***** -->
 <section class="section" id="products">
     <div class="container">
@@ -30,7 +31,37 @@
         </div>
     </div>
     <div class="container">
-        <div class="row">
+        <div class="row">   
+            <div class="col-lg-3 col-sm-12" style="text-align:center;">
+                <h1 style="font-size:40px;margin-bottom:40px"><em>Filters</em></h1>
+                <form action="{{route('product.filter')}}" method="post">
+                    @csrf
+                    @method('POST')
+                    <div class="row" style="margin-bottom: 20px;">
+                        <div class="col-lg-12">
+                        <input type="text" style="width: 209.5px;" name="search" class="form-input" placeholder="Tìm kiếm sản phẩm..." >
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 20px;">
+                        <div class="col-lg-12">
+                            <select class="form-select form-select-sm" name="category">
+                            <option selected>Tìm theo danh mục</option>
+                            @foreach($category as $ct)
+                            <option value="{{$ct->id}}">{{$ct->name}}</option>
+                            @endforeach
+                            </select>
+                        </div>
+                    </div>
+                   <div class="row" style="margin-bottom: 20px;">
+                   <div class="col-lg-12">
+                    <button class="btn btn-primary" style="height: 39px;">Tìm kiếm</button>
+                    </div>
+                   </div>
+                    
+                </form>
+            </div>
+            <div class="col-lg-8 col-sm-12">
+            <div class="row">      
             @foreach($products as $pr)
             <div class="col-lg-4">
                 <div class="item">
@@ -55,6 +86,9 @@
                 {{$products->links()}}
             </div>
         </div>
+            </div>
+        </div>
+        
     </div>
 </section>
 <script>

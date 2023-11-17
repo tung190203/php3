@@ -36,7 +36,7 @@
                         <th>Product Image</th>
                         <th>Price</th>
                         <th>Amount</th>
-                        <th>Size</th>
+                        <th>Author</th>
                         <th>Action</th>
                     </thead>
                     <tbody>
@@ -54,7 +54,7 @@
                             <th>Product Image</th>
                             <th>Price</th>
                             <th>Amount</th>
-                            <th>Size</th>
+                            <th>Author</th>
                             <th>Action</th>
                         </thead>
                         <tbody>
@@ -66,7 +66,7 @@
                                 <td><img width="100" src="uploads/{{$pro->images}}" alt=""></td>
                                 <td>{{$pro->price}}</td>
                                 <td>{{$pro->product_amount}}</td>
-                                <td>{{$pro->product_size}}</td>
+                                <td>{{$pro->author->name}}</td>
                                 <td>
                                     <form action="{{route('cart.delete',['id'=>$pro->id])}}" method="post">
                                         @csrf

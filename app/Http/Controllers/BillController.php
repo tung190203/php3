@@ -27,6 +27,7 @@ class BillController extends Controller
                 ->whereIn('carts.id', $cart->pluck('id')->toArray())
                 ->get();
         }
+        
         return view('client.shop.order', ['user' => $user, 'product' => $product]);
     }
     public function orderConfirm(Request $request ){
@@ -68,7 +69,7 @@ class BillController extends Controller
         $bill = Bill::where('user_id', $user->id)->latest()->first();
         $cart = DB::table('carts')
         ->join('products','carts.product_id','=','products.id')
-        ->select('products.name','products.images','products.price','carts.id','carts.product_amount','carts.product_size')
+        ->select('products.name','products.images','products.price','carts.id','carts.product_amount')
         ->whereIn('carts.id',$bill->cart_id)->get();
         return view('client.shop.bill-confirm',compact('cart','bill'));
     }
@@ -76,7 +77,7 @@ class BillController extends Controller
         $id = request()->id;
         $bill = Bill::findOrFail($id);
         $cart = DB::table('carts')->join('products','carts.product_id','=','products.id')
-        ->select('products.name','products.images','products.price','carts.id','carts.product_size','carts.product_amount')
+        ->select('products.name','products.images','products.price','carts.id','carts.product_amount')
         ->whereIn('carts.id',$bill->cart_id)->get();
         
         return view('client.shop.bill-detail',compact('cart','bill'));
@@ -85,7 +86,7 @@ class BillController extends Controller
         $id = request()->id;
         $bill = Bill::findOrFail($id);
         $cart = DB::table('carts')->join('products','carts.product_id','=','products.id')
-        ->select('products.name','products.images','products.price','carts.id','carts.product_size','carts.product_amount')
+        ->select('products.name','products.images','products.price','carts.id','carts.product_amount')
         ->whereIn('carts.id',$bill->cart_id)->get();
         
         return view('admin.bills.bill-admin',compact('cart','bill'));

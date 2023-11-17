@@ -25,11 +25,9 @@ class CreateProductRequest extends FormRequest
             'amount'=>'required|numeric',
             'description'=>'required|string',
             'price'=>'required|numeric',
-            'images' => 'required|image|mimes:jpeg,png,jpg',
-            'gender'=>'required|string',
-            'brand_id'=>'required',
+            'images' => 'required|image|mimes:jpeg,png,jpg,gif', 
+            'author_id'=>'required',
             'category_id'=>'required',
-            'size'=>'required'
         ];
     }
 }

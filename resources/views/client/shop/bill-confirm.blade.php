@@ -74,7 +74,7 @@
                                                 <th scope="col">Image</th>
                                                 <th scope="col">Amount</th>
                                                 <th scope="col">Price</th>
-                                                <th scope="col">Size</th>
+                                                
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -85,7 +85,7 @@
                                                 <td><img width="100" src="uploads/{{$ct->images}}" alt=""></td>
                                                 <td>{{$ct->product_amount}} products</td>
                                                 <td>${{$ct->price}}</td>
-                                                <td>{{$ct->product_size}}</td>
+                                                
                                             </tr>
                                             @endforeach
                                         </tbody>

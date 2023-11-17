@@ -71,7 +71,10 @@
                                 {{$ct->name}}
                             </td>
                             <td class="px-4 py-3 text-sm">
+                                <div class="text-container1">
                                 {{$ct->description}}
+                                </div>
+                                
                             </td>
                             <td class="px-4 py-3">
                                 <div class="flex items-center space-x-4 text-sm">
@@ -119,4 +122,13 @@
             </div>
    
 </main>
+<script>
+function importCSS(url) {
+    var link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = url;
+    document.getElementsByTagName("head")[0].appendChild(link);
+}
+importCSS("assets/css/textcontent.css");
+</script>
 @endsection

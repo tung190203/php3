@@ -10,21 +10,17 @@ class Product extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name','amount','description','price','images','gender','brand_id','category_id','size'
+        'name','amount','description','price','images','author_id','category_id',
     ];
     protected $casts = [
         'size' => 'json',
     ];
-    public function brand() :BelongsTo
-    {
-        return $this->belongsTo(Brand::class);
-    }
     public function category() :BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
-    public function scopeGender($query, $gender)
+    public function author() :BelongsTo
     {
-        return $query->where('gender', $gender);
+        return $this->belongsTo(Author::class);
     }
 }

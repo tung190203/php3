@@ -39,23 +39,13 @@
                                 </p>
                             </div>
                             <div class="col-lg-6">
-                                <p style="margin-bottom:20px">Brand:
-                                    <strong style="color:black">{{$product->brand->brand_name}}</strong>
+                                <p style="margin-bottom:20px">Author:
+                                    <strong style="color:black">{{$product->author->name}}</strong>
                                 </p>
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="col-lg-6">
-                                <label for="">Size</label>
-                                <div>
-                                    <select name="product_size" class="form-size">
-                                        @foreach($product->size as $size)
-                                        <option value="{{$size}}">{{$size}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
                             <div class="col-lg-6">
                                 <label for="">Số lượng</label>
                                 <div>

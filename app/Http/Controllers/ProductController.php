@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use App\Http\Requests\CreateProductRequest;
-use App\Models\Brand;
+use App\Models\Author;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Product;
@@ -13,7 +13,7 @@ class ProductController extends Controller
      */
     public function tableProduct(){
         $perPage = 5;
-        $products = Product::with('brand', 'category')->paginate($perPage);
+        $products = Product::with('author', 'category')->paginate($perPage);
         $totalProducts = Product::count('id');
         return view('admin.products.product',['products'=> $products,'totalproducts'=>$totalProducts]);
     }
@@ -23,7 +23,7 @@ class ProductController extends Controller
         $currentPage = Paginator::resolveCurrentPage('page');
         $totalProducts = Product::count('id');
         $searchKeyword = $request->input('search');
-        $productsQuery = Product::with('brand', 'category');
+        $productsQuery = Product::with('author', 'category');
         if (!empty($searchKeyword)) {
             $productsQuery->where('name', 'LIKE', '%' . $searchKeyword . '%');
         }
@@ -32,8 +32,8 @@ class ProductController extends Controller
     }
     public function product(){
         $categories = Category::all();
-        $brands = Brand::all();
-        return view('admin.products.add-product',compact('categories','brands'));
+        $authors = Author::all();
+        return view('admin.products.add-product',compact('categories','authors'));
     }
     public function createproduct(CreateProductRequest $request){
     // Kiểm tra sự tồn tại của sản phẩm
@@ -63,10 +63,10 @@ class ProductController extends Controller
     }
     public function editProduct(){
         $id = request()->id;
-        $product = Product::with('brand','category')->findOrFail($id);
-        $brand = Brand::whereNotIn('id', [$product['brand_id']])->get();
+        $product = Product::with('author','category')->findOrFail($id);
+        $author = Author::whereNotIn('id', [$product['author_id']])->get();
         $category = Category::whereNotIn('id',[$product['category_id']])->get();
-        return view('admin.products.edit-product',compact('product','brand','category'));
+        return view('admin.products.edit-product',compact('product','author','category'));
     }
     public function updateProduct(Request $request,$id){
         $product = Product::find($id);

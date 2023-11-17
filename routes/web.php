@@ -1,7 +1,7 @@
 <?php
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BillController;
-use App\Http\Controllers\BrandController;
+use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
@@ -54,13 +54,13 @@ use Illuminate\Support\Facades\Route;
     Route::delete('/category-table/{id}',[CategoryController::class,'delete'])->name('category.delete');
     Route::get('/editCategory',[CategoryController::class,'editCategory'])->name('category.edit');
     Route::patch('/updateCategory/{id}',[CategoryController::class,'updateCategory'])->name('category.update');
-    //brand-admin
-    Route::get('/brand-table',[BrandController::class,'tableBrand']);
-    Route::get('/brand',[BrandController::class,'brand']);
-    Route::post('/createBrand',[BrandController::class,'createbrand'])->name('addBrand');
-    Route::delete('/brand-table/{id}', [BrandController::class,'delete'])->name('brand.delete');
-    Route::get('/editBrand',[BrandController::class,'editBrand'])->name('brand.edit');
-    Route::patch('/updateBrand/{id}',[BrandController::class,'updateBrand'])->name('brand.update');
+    //author-admin
+    Route::get('/author-table',[AuthorController::class,'tableAuthor']);
+    Route::get('/author',[AuthorController::class,'author']);
+    Route::post('/createAuthor',[AuthorController::class,'createauthor'])->name('addAuthor');
+    Route::delete('/author-table/{id}', [AuthorController::class,'delete'])->name('author.delete');
+    Route::get('/editAuthor',[AuthorController::class,'editAuthor'])->name('author.edit');
+    Route::patch('/updateAuthor/{id}',[AuthorController::class,'updateAuthor'])->name('author.update');
     //user-admin
     Route::get('/user-table',[UserController::class,'tableUser']);
     Route::post('/user-table',[UserController::class,'search'])->name('user.search');
@@ -87,10 +87,11 @@ use Illuminate\Support\Facades\Route;
     //page
     Route::get('/about',[HomeController::class, 'about']);
     Route::get('/contact',[HomeController::class, 'contact']);
+    Route::get('/voucher',[HomeController::class, 'voucher']);
     //Product
     Route::get('/shop',[HomeController::class ,'shop']);
-    Route::get('/man',[HomeController::class ,'man']);
-    Route::get('/woman',[HomeController::class ,'woman']);
+    Route::post('/shop',[HomeController::class,'filterOrSearch'])->name('product.filter');
+    // Route::post('/search-product',[HomeController::class,'search'])->name('search');
     Route::get('/detail',[HomeController::class,'detail'])->name('product.detail');
     //bill &cart home
     Route::post('/addCart',[CartController::class,'addCart'])->name('product.addcart');

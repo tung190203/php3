@@ -38,8 +38,7 @@
                         <ul class="nav">
                             <li><a href="/home">Home</a></li>
                             <li><a href="/shop">Shop</a></li>
-                            <li><a href="/man">Men's</a></li>
-                            <li><a href="/woman">Women's</a></li>
+                            <li><a href="/voucher">Voucher</a></li>
                             <li><a href="/about">About Us</a></li>
                             <li><a href="/contact">Contact Us</a></li>
                             @auth

@@ -72,10 +72,8 @@
                             <th class="px-4 py-3">Description</th>
                             <th class="px-4 py-3">Price</th>
                             <th class="px-4 py-3">Images</th>
-                            <th class="px-4 py-3">Gender</th>
-                            <th class="px-4 py-3">Brands</th>
+                            <th class="px-4 py-3">Author</th>
                             <th class="px-4 py-3">Category</th>
-                            <th class="px-4 py-3">Size</th>
                             <th class="px-4 py-3">Actions</th>
                         </tr>
                     </thead>
@@ -108,22 +106,12 @@
                                         alt="image" loading="lazy" />
                                 </div>
                             </td>
-                            <td class=" px-4 py-3 text-sm">
-                                {{$pr->gender}}
-                            </td>
                             <td class="px-4 py-3 text-sm">
-                                {{$pr->brand->brand_name}}
+                                {{$pr->author->name}}
 
                             </td>
                             <td class="px-4 py-3 text-sm">
                                 {{$pr->category->name}}
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                @php
-                                $sizeItems = $pr->size;
-                                $sizeString = implode(', ', $sizeItems);
-                                @endphp
-                                {{$sizeString}}
                             </td>
                             <td class="px-4 py-3">
                                 <div class="flex items-center space-x-4 text-sm">
